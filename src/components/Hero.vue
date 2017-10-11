@@ -22,7 +22,7 @@
                 // container infos
                 console.log(el);
                 this.el = el;
-                
+
                 this.width = this.el.offsetWidth;
                 this.height = this.el.offsetHeight;
 
@@ -93,17 +93,17 @@
                 function initInputListener() {
 
                     // Multitouch Events!
-                    this.canvas.addEventListener('touchstart', manageTouch.bind(this));
-                    this.canvas.addEventListener('touchmove', manageTouch.bind(this));
-                    this.canvas.addEventListener('touchend', manageTouch.bind(this));
-                    this.canvas.addEventListener('touchleave', manageTouch.bind(this));
-                    this.canvas.addEventListener('touchcancel', manageTouch.bind(this));
-                    this.canvas.addEventListener('touchenter', manageTouch.bind(this));
+//                    this.canvas.addEventListener('touchstart', manageTouch.bind(this));
+//                    this.canvas.addEventListener('touchmove', manageTouch.bind(this));
+//                    this.canvas.addEventListener('touchend', manageTouch.bind(this));
+//                    this.canvas.addEventListener('touchleave', manageTouch.bind(this));
+//                    this.canvas.addEventListener('touchcancel', manageTouch.bind(this));
+//                    this.canvas.addEventListener('touchenter', manageTouch.bind(this));
 
-                    this.canvas.addEventListener('mousedown', mouseDown.bind(this));
-                    this.canvas.addEventListener('mousemove', mouseMove.bind(this));
-                    this.canvas.addEventListener('mouseup', mouseUp.bind(this));
-                    this.canvas.addEventListener('mouseout', mouseUp.bind(this));
+//                    this.canvas.addEventListener('mousedown', mouseDown.bind(this));
+//                    this.canvas.addEventListener('mousemove', mouseMove.bind(this));
+//                    this.canvas.addEventListener('mouseup', mouseUp.bind(this));
+//                    this.canvas.addEventListener('mouseout', mouseUp.bind(this));
                 }
 
                 /**
@@ -151,48 +151,48 @@
                 var mouseId = 0;
 
 
-                function mouseDown(event) {
-                    mouseIsDown = 1;
-                    lastCapture = 0;
-                    this.inputs = [{
-                        x : event.clientX - deltaLeft - window.scrollX,
-                        y : event.clientY - deltaTop + window.scrollY,
-                        id : ++mouseId,
-                        type : 'down'
-                    }];
-                }
-
-
-                function mouseMove(event) {
-                    if (mouseIsDown) {
-                        this.inputs = [{
-                            x : event.clientX - deltaLeft - window.scrollX,
-                            y : event.clientY - deltaTop + window.scrollY,
-                            id : mouseId,
-                            type : 'move'
-                        }];
-                    }
-
-                    var now = new Date().getTime();
-
-                    if (lastCapture) {
-                        this.captureTime = lastCapture - now;
-                    }
-
-                    lastCapture = now;
-
-                }
-
-                function mouseUp(event) {
-                    mouseIsDown = 0;
-                    lastCapture = 0;
-                    this.inputs = [{
-                        x : event.clientX - deltaLeft - window.scrollX,
-                        y : event.clientY - deltaTop + window.scrollY,
-                        id : mouseId,
-                        type : 'up'
-                    }];
-                }
+//                function mouseDown(event) {
+//                    mouseIsDown = 1;
+//                    lastCapture = 0;
+//                    this.inputs = [{
+//                        x : event.clientX - deltaLeft - window.scrollX,
+//                        y : event.clientY - deltaTop + window.scrollY,
+//                        id : ++mouseId,
+//                        type : 'down'
+//                    }];
+//                }
+//
+//
+//                function mouseMove(event) {
+//                    if (mouseIsDown) {
+//                        this.inputs = [{
+//                            x : event.clientX - deltaLeft - window.scrollX,
+//                            y : event.clientY - deltaTop + window.scrollY,
+//                            id : mouseId,
+//                            type : 'move'
+//                        }];
+//                    }
+//
+//                    var now = new Date().getTime();
+//
+//                    if (lastCapture) {
+//                        this.captureTime = lastCapture - now;
+//                    }
+//
+//                    lastCapture = now;
+//
+//                }
+//
+//                function mouseUp(event) {
+//                    mouseIsDown = 0;
+//                    lastCapture = 0;
+//                    this.inputs = [{
+//                        x : event.clientX - deltaLeft - window.scrollX,
+//                        y : event.clientY - deltaTop + window.scrollY,
+//                        id : mouseId,
+//                        type : 'up'
+//                    }];
+//                }
 
 
                 function run() {
@@ -244,7 +244,7 @@
                 ];
                 // ideal to fine tune your brush!
                 var PARAMETERS = {
-                    squareSize  : 10
+                    squareSize  : 50
                 };
 
 
@@ -471,13 +471,8 @@
                             };
                         }
                     }
-
                     FLUIDMAP = newFluid;
-
-
-
-
-                }
+                };
 
                 this.render = function() {
                     backCtx.fillStyle = '#fff';
@@ -502,13 +497,13 @@
                     }
 
 
-                    ctx.fillStyle = '#2DEBAE';
+                    ctx.fillStyle = '#4ee0cc';
 
                     var grd = ctx.createLinearGradient(0, 0, 0, this.engine.height);
                     // light blue
-                    grd.addColorStop(0, '#2DEBAE');
+                    grd.addColorStop(0, '#4ee0cc');
                     // dark blue
-                    grd.addColorStop(1, '#B0254F');
+                    grd.addColorStop(1, '#dafd00');
                     ctx.fillStyle = grd;
 
 
@@ -521,7 +516,7 @@
 
                     ctx.globalCompositeOperation = 'destination-over';
 
-                    ctx.fillStyle = '#1C264A';
+                    ctx.fillStyle = '#FFFFFF';
                     ctx.fillRect(0,0,this.engine.width, this.engine.height);
 
                     ctx.globalCompositeOperation = 'source-over';
