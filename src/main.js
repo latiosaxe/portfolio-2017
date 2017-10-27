@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import Home from './components/sections/Home'
-import Hero from './components/components/Hero'
+import Hero from './components/elements/Hero'
 
 import router from './router'
 
@@ -15,7 +15,9 @@ new Vue({
   el: '#app',
   router,
   template: '<Home/>',
-  components: { Home, Hero }
+  components: {
+      'Home': Home
+  }
 })
 
 

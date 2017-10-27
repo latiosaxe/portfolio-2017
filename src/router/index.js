@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Home from '@/components/sections/Home'
-import Hero from '@/components/components/Hero'
+import Hero from '@/components/elements/Hero'
 
 Vue.use(Router)
 
@@ -11,7 +11,10 @@ export default new Router({
     {
       path: '/',
       name: 'Home',
-      component: {Home, Hero}
+        components: {
+            default: Home,
+            hero: Hero,
+        }
     }
   ]
 })
