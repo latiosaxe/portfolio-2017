@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Home from './components/sections/Home'
 import Hero from './components/elements/Hero'
+import HeroCanvas from './components/elements/HeroCanvas'
 
 import router from './router'
 
@@ -15,9 +16,9 @@ new Vue({
   el: '#app',
   router,
   template: '<Home/>',
-  components: {
-      'Home': Home
-  }
+    components: {
+      Home: Home
+    }
 })
 
 
