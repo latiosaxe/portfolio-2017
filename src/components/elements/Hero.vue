@@ -9,7 +9,7 @@
         data () {
             return {
                 settings: {
-                    circlesLimit: 10,
+                    circlesLimit: 3,
                     extraSpeed: 2,
 //                    startY: 0,
 //                    lines: 30,
@@ -30,14 +30,14 @@
                 particleCount: 0,
             }
         },
-//        mounted(){
-//            this.initHero();
-//        },
-        created() {
-            setTimeout(function () {
-                this.initHero();
-            }.bind(this), 1000);
+        mounted(){
+            this.initHero();
         },
+//        created() {
+//            setTimeout(function () {
+//                this.initHero();
+//            }.bind(this), 1000);
+//        },
         methods: {
             initHero: function () {
                 let $this = this;
@@ -61,7 +61,6 @@
                     $this.speedChange = true;
                     $this.mouseDown = false;
                 }, false);
-
             },
 
             drawCircles: function() {
