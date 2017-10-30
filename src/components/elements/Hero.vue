@@ -11,7 +11,7 @@
         name: 'hero',
         data () {
             return {
-                msg: 'Welcome to Your Vue.js App'
+                showedCanvas: false,
             }
         },
         created() {
@@ -22,6 +22,7 @@
         },
         methods: {
             initHero: function () {
+                let $this = this;
                 let settings = {
                     amplitudeX: 60,
                     amplitudeY: 82,
@@ -31,9 +32,8 @@
                     endColor: '#73e47a'
                 };
 
-                const c = document.getElementById("canvas");
-                console.log(c);
-                const context = c.getContext("2d");
+                const cavas = document.getElementById("canvas");
+                const context = canvas.getContext("2d");
                 let winW = document.body.clientWidth;
                 let winH = document.body.clientWidth;
                 let Paths = [];
@@ -99,8 +99,8 @@
                 }
                 let path;
                 function init() {
-                    c.width = winW;
-                    c.height = winH;
+                    canvas.width = winW;
+                    canvas.height = winH;
                     Paths = [];
                     color = chroma.scale([settings.startColor, settings.middleColor, settings.endColor])
                                    .mode('lch').colors(settings.lines);
@@ -114,15 +114,15 @@
                 window.addEventListener('resize', function () {
                     winW = document.body.clientWidth;
                     winH = document.body.clientHeight;
-                    c.width = winW;
-                    c.height = winH;
+                    canvas.width = winW;
+                    canvas.height = winH;
                     init();
                 });
 
                 window.dispatchEvent(new Event("resize"));
                 function render() {
-                    c.width = winW;
-                    c.height = winH;
+                    canvas.width = winW;
+                    canvas.height = winH;
                     curves = 4;
                     velocity = 0.8;
                     time += 0.05;
@@ -142,6 +142,10 @@
                         });
                         path.draw();
                     });
+                    if($this.showedCanvas === false){
+                        $this.showedCanvas = true;
+                        $this.$emit('canvasShowed', true);
+                    }
                     requestAnimationFrame(render);
                 }
                 render();
