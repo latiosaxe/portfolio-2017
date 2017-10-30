@@ -1,7 +1,5 @@
 <template>
-    <div>
-        <canvas id="canvas"></canvas>
-    </div>
+    <canvas id="canvas"></canvas>
 </template>
 
 <script>
@@ -12,10 +10,25 @@
         data () {
             return {
                 showedCanvas: false,
+                winW: 0,
+                winH: 0,
+                circles: [],
+                settings: {
+                    startY: 0,
+                    lines: 30,
+                    circles: 10,
+                    maxRadius: 20,
+                    minRadius: 3,
+                    startColor: '#FFFFFF',
+                    middleColor: '#73e47a',
+                    endColor: '#4d9a4d'
+                }
             }
         },
+//        mounted(){
+//            this.initHero();
+//        },
         created() {
-//            console.log(document.getElementById('container'));
             setTimeout(function () {
                 this.initHero();
             }.bind(this), 1000);
@@ -23,132 +36,73 @@
         methods: {
             initHero: function () {
                 let $this = this;
-                let settings = {
-                    amplitudeX: 60,
-                    amplitudeY: 82,
-                    lines: 45,
-                    startColor: '#000000',
-                    middleColor: '#4d9a4d',
-                    endColor: '#73e47a'
-                };
 
-                const cavas = document.getElementById("canvas");
-                const context = canvas.getContext("2d");
-                let winW = document.body.clientWidth;
-                let winH = document.body.clientWidth;
+                this.winW = document.body.clientWidth;
+                this.winH = document.body.clientHeight;
+
+
+                const c = document.getElementById("canvas");
+                c.width = this.winW;
+                c.height = this.winH;
+                console.log(this.winW, this.winH);
+                var context = c.getContext("2d");
+
+                this.initCircles(context);
+
+//                window.addEventListener('resize', function () {
+//                    this.winW = document.body.clientWidth;
+//                    this.winH = document.body.clientHeight;
+//                    canvas.width = this.winW;
+//                    canvas.height = this.winH;
+//                });
+//                window.dispatchEvent(new Event("resize"));
+//
+//                this.render();
+            },
+            initCircles: function (context) {
                 let Paths = [];
-                let color = [];
-                let mouseY = 0;
-                let mouseDown = false;
-                let time = 0;
-                let curves;
-                let velocity;
+                let $this = this;
 
-                class Path {
-                    constructor(y, color) {
-                        this.y = y;
-                        this.color = color;
-                        this.root = [];
-                        this.create();
-                        this.draw();
-                    }
+                let color = chroma.scale([$this.settings.startColor, $this.settings.middleColor, $this.settings.endColor])
+                        .mode('lch').colors($this.settings.lines);
+                document.body.style = `background: ${$this.settings.startColor}`;
 
-                    create() {
-                        let rootX = 0;
-                        let rootY = this.y;
-                        this.root = [{ x: rootX, y: rootY }];
-                        while (rootX < winW) {
-                            let casual = Math.random() > 0.5 ? 1 : -1;
-                            let x = parseInt(
-                                settings.amplitudeX / 2 + Math.random() * settings.amplitudeX / 2
-                            );
-                            let y = parseInt(rootY + casual * (settings.amplitudeY / 2 + Math.random() * settings.amplitudeY / 2));
-                            rootX += x;
-                            let delay = Math.random() * 100;
-                            this.root.push({ x: rootX, y: y, height: rootY, casual: casual, delay: delay });
-                        }
-                    }
-
-                    draw() {
-                        context.beginPath();
-                        context.moveTo(0, winH);
-                        context.lineTo(this.root[0].x, this.root[0].y);
-                        for (let i = 1; i < this.root.length - 1; i++) {
-                            let x = this.root[i].x;
-                            let y = this.root[i].y;
-                            let nextX = this.root[i + 1].x;
-                            let nextY = this.root[i + 1].y;
-                            let xMid = (x + nextX) / 2;
-                            let yMid = (y + nextY) / 2;
-                            let cpX1 = (xMid + x) / 2;
-                            let cpY1 = (yMid + y) / 2;
-                            let cpX2 = (xMid + nextX) / 2;
-                            let cpY2 = (yMid + nextY) / 2;
-
-                            context.quadraticCurveTo(cpX1, y, xMid, yMid);
-                            context.quadraticCurveTo(cpX2, nextY, nextX, nextY);
-                        }
-                        const lastPoint = this.root.reverse()[0];
-                        this.root.reverse();
-                        context.lineTo(lastPoint.x, lastPoint.y);
-                        context.lineTo(winW, winH);
-                        context.fillStyle = this.color;
-                        context.fill();
-                        context.closePath();
-                    }
-                }
-                let path;
-                function init() {
-                    canvas.width = winW;
-                    canvas.height = winH;
-                    Paths = [];
-                    color = chroma.scale([settings.startColor, settings.middleColor, settings.endColor])
-                                   .mode('lch').colors(settings.lines);
-                    document.body.style = `background: ${settings.startColor}`;
-                    for (let i = 0; i < settings.lines; i++) {
-                        Paths.push(new Path(winH / settings.lines * i, color[i]));
-                        settings.startY = winH / settings.lines * i;
-                    }
+                for (let i = 0; i < $this.settings.lines; i++) {
+                    Paths.push( ( ( $this.winH / $this.settings.lines * i ), color[i] ) );
+                    $this.settings.startY = $this.winH / $this.settings.lines * i;
                 }
 
-                window.addEventListener('resize', function () {
-                    winW = document.body.clientWidth;
-                    winH = document.body.clientHeight;
-                    canvas.width = winW;
-                    canvas.height = winH;
-                    init();
-                });
-
-                window.dispatchEvent(new Event("resize"));
-                function render() {
-                    canvas.width = winW;
-                    canvas.height = winH;
-                    curves = 4;
-                    velocity = 0.8;
-                    time += 0.05;
-                    curves = mouseDown ? 2 : 4;
-                    velocity = mouseDown ? 6 : 0.8;
-                    time += mouseDown ? 0.1 : 0.05 ;
-                    Paths.forEach(function (path, i) {
-                        path.root.forEach(function (r, j) {
-                            if (j % curves == 1) {
-                                let move = Math.sin(time + r.delay ) * velocity * r.casual;
-                                r.y -= (move / 2) - move;
-                            }
-                            if (j + 1 % curves == 0) {
-                                let move = Math.sin(time + r.delay ) * velocity * r.casual;
-                                r.x += (move / 2) - move / 10;
-                            }
-                        });
-                        path.draw();
-                    });
-                    if($this.showedCanvas === false){
-                        $this.showedCanvas = true;
-                        $this.$emit('canvasShowed', true);
-                    }
-                    requestAnimationFrame(render);
+                for(let n=0; n < $this.settings.circles; n++) {
+                    let xPos = Math.random() * canvas.width;
+                    let yPos = Math.random() * canvas.height;
+                    let radius = $this.settings.minRadius + (Math.random() * ($this.settings.maxRadius - $this.settings.minRadius));
+                    let color = Paths[n];
+                    
+                    this.drawCircle(context, xPos, yPos, radius, color);
                 }
-                render();
+
+
+            },
+            drawCircle: function (context, xPos, yPos, radius, color) {
+                var startAngle        = (Math.PI/180)*0;
+                var endAngle          = (Math.PI/180)*360;
+                context.beginPath();
+                context.arc(xPos, yPos, radius, startAngle, endAngle, false);
+                context.arc(xPos, yPos, (radius * 0.8), startAngle, endAngle, true);
+                context.fillStyle = color;
+                context.fill();
+                context.closePath();
+            },
+            render: function () {
+                let $this = this;
+                canvas.width = this.winW;
+                canvas.height = this.winH;
+
+                if($this.showedCanvas === false){
+                    $this.showedCanvas = true;
+                    $this.$emit('canvasShowed', true);
+                }
+                requestAnimationFrame(this.render);
             }
         }
     }
@@ -156,16 +110,4 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-    #hero, #container{
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        /*background: #fff;*/
-        position: absolute;
-
-        width: 100vw;
-        height: 100vh;
-        background: transparent;
-    }
 </style>
