@@ -1,7 +1,7 @@
 <template>
     <div class="website">
-        <div :class="['hero',(welcomeShow===true)?'active':'']">
-            <div class="name">
+        <div :class="['hero', (welcomeShow===true)?'active':'']">
+            <div class="hero__name">
                 <h2><span>Hello, I'm Axel</span></h2>
             </div>
             <router-view @canvasShowed="initHome" class="view two" name="hero"></router-view>
@@ -56,7 +56,7 @@
         height: 100vh;
         position: relative;
         min-height: 400px;
-        .name{
+        @at-root #{&}__name {
             top: 50%;
             left: 50%;
             z-index: 2;
@@ -86,16 +86,16 @@
                      position: absolute;
                      background: $primary-color;
                      transition: all 350ms 500ms ease-out;
-                 }
+                }
             }
         }
-        canvas{
+        @at-root #{&}__canvas{
             z-index: 1;
             position: absolute;
             top:0; left: 0; right: 0; bottom: 0;
         }
         &.active{
-             .name{
+            .hero__name{
                 h2{
                     opacity: 1;
                     transform: translateY(0);
