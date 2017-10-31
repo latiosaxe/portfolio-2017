@@ -10,7 +10,7 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-window['myGlobal'] = process.env.NODE_ENV
+window['myGlobal'] = process.env.NODE_ENV;
 
 /* eslint-disable no-new */
 const app = new Vue({
