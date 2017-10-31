@@ -9,7 +9,7 @@
         <div class="personal">
             <div class="personal__block">
                 <div class="personal__block__title">Doctor Advisor</div>
-                <img src="/static/images/doctor-advisor.jpg" alt="Doctor Advisor" class="personal__block__image">
+                <img src="static/images/doctor-advisor.jpg" alt="Doctor Advisor" class="personal__block__image">
                 <div class="personal__block__description">
                     <strong class="personal__block__description__title">Doctor Advisor</strong> is one of my favorite projects. With <strong>Sergio</strong> (Sales Director) and
                     <strong>Grissel</strong> (UX and UI Designer) we made an incredible
@@ -20,7 +20,7 @@
             </div>
             <div class="personal__block">
                 <div class="personal__block__title">Photography Inspiration</div>
-                <img src="/static/images/photo-inspiration.jpg" alt="Photo Inspiration" class="personal__block__image">
+                <img src="static/images/photo-inspiration.jpg" alt="Photo Inspiration" class="personal__block__image">
                 <div class="personal__block__description">
                     <p>
                         Right know I’m working on three projects; one of them is <strong class="personal__block__description__title">Photography Inspiration</strong>,

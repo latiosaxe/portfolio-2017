@@ -71,8 +71,8 @@
                         sub_title: 'Victoria, 2017',
                         resume: 'Interactive masthead with sounds and animations',
                         description: 'Dia de muertos is a famous celebration full of flavors, colors and sounds. The famous Mexican beer Victoria launched a campaign called \'Hacemos tanto ruido que despertamos a los muertos\' which in English means \'We make so much noise that we wake up the dead\'. \n \n We created an incredible experience for YouTube with the help of a musician, an illustrator and an animator.',
-                        gif: '/static/images/projects/victoria-masthead/hero-gif.gif',
-                        aditional_image: '/static/images/projects/victoria-masthead/pattern.png',
+                        gif: 'static/images/projects/victoria-masthead/hero-gif.gif',
+                        aditional_image: 'static/images/projects/victoria-masthead/pattern.png',
                         url: 'http://previews.ktbo.mx/banners/victoria/sound-loop/',
                         color: '#b31f29',
                         gradient: 1
@@ -83,8 +83,8 @@
                         sub_title: 'Reebok, 2016',
                         resume: 'Parallax website promoting Nano 6.0 shoes',
                         description: 'Reebok is famous for making high quality shoes for athletes, Nano 6.0 is a model focused on the CrossFit community, the movement experience was very important for the whole micro-site. I did not develop the CGI, I just asked for the sequence of images.',
-                        gif: '/static/images/projects/nano-6/hero-gif.gif',
-                        aditional_image: '/static/images/projects/nano-6/preview.png',
+                        gif: 'static/images/projects/nano-6/hero-gif.gif',
+                        aditional_image: 'static/images/projects/nano-6/preview.png',
                         url: 'http://nano.reebokmexico.com/',
                         color: '#02bab6',
                         gradient: 2
@@ -94,8 +94,8 @@
                         sub_title: 'Diageo, 2016',
                         resume: 'Cocktails, Mixed Drinks and Cocktail Recipes',
                         description: 'The biggest website for cocktail recipes in Mexico was a big challenge because we had very little time to develop it, an European company had tried to developt the project and it took a year to say \'We can not do it\', that\'s why when the project arrives to KTBO in Mexico, we had to develop it in 3 months (The first version). The Bar MX has an important job in SEO as information Schema validated by W3',
-                        gif: '/static/images/projects/thebar/hero-gif.gif',
-                        aditional_image: '/static/images/projects/thebar/preview.jpg',
+                        gif: 'static/images/projects/thebar/hero-gif.gif',
+                        aditional_image: 'static/images/projects/thebar/preview.jpg',
                         url: 'https://thebar.com.mx/',
                         color: '#ff5e00',
                         gradient: 3
@@ -105,8 +105,8 @@
                         sub_title: 'KTBO, 2016',
                         resume: 'Official Website',
                         description: 'They say, \'Try something differente\', so here it is.',
-                        gif: '/static/images/projects/ktbo/hero-gif.gif',
-                        aditional_image: '/static/images/projects/ktbo/preview.jpg',
+                        gif: 'static/images/projects/ktbo/hero-gif.gif',
+                        aditional_image: 'static/images/projects/ktbo/preview.jpg',
                         url: 'https://thebar.com.mx/',
                         color: '#000000',
                         gradient: 4
