@@ -12,21 +12,10 @@ import Contact from '@/components/elements/Contact'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Home',
-        components: {
-            Home: Home,
-            Hero: Hero,
-            Description: Description,
-            Work: Work,
-            Knowledge: Knowledge,
-            Personal: Personal,
-            Contact: Contact,
-        }
-    },{
-      path: '/portfolio',
       name: 'Home',
         components: {
             Home: Home,
