@@ -13,12 +13,12 @@ Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 const app = new Vue({
-  el: '#app',
+  // el: '#app',
   router,
   template: '<Home/>',
     components: {
       Home: Home
     }
-})
+}).$mount('#app')
 
 
