@@ -90,7 +90,7 @@
                         resume: 'Cocktails, Mixed Drinks and Cocktail Recipes',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, fugit mollitia. Corporis dolore dolores explicabo harum ipsam, labore molestias mollitia provident quia quis quod ratione sapiente sint tenetur ut voluptatem.',
                         gif: '/static/images/projects/thebar/hero-gif.gif',
-                        aditional_image: '/static/images/projects/thebar/preview.png',
+                        aditional_image: '/static/images/projects/thebar/preview.jpg',
                         url: 'https://thebar.com.mx/',
                         color: '#ff5e00'
                     },{
@@ -100,7 +100,7 @@
                         resume: 'Official Website',
                         description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, fugit mollitia. Corporis dolore dolores explicabo harum ipsam, labore molestias mollitia provident quia quis quod ratione sapiente sint tenetur ut voluptatem.',
                         gif: '/static/images/projects/ktbo/hero-gif.gif',
-                        aditional_image: '/static/images/projects/ktbo/preview.png',
+                        aditional_image: '/static/images/projects/ktbo/preview.jpg',
                         url: 'https://thebar.com.mx/',
                         color: '#000000'
                     }
