@@ -280,8 +280,9 @@
            /*padding: 5rem 0;*/
             &__element{
                 width: 100%;
-                position: relative;
                 clear: both;
+                height: 265px;
+                position: relative;
                 &__square{
                     /*width: 100%;*/
                     max-width: 48%;

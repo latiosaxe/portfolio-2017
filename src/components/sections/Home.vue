@@ -5,6 +5,7 @@
             <router-view name="Description"></router-view>
         </div>
         <router-view name="Work"></router-view>
+        <router-view name="Knowledge"></router-view>
     </div>
 </template>
 
