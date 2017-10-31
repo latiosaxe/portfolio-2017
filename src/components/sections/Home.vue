@@ -61,10 +61,10 @@
                     if( ( this.prevLastScrollTop - this.lastScrollTop ) > this.settings.factorDistance || ( this.prevLastScrollTop - this.lastScrollTop ) < (this.settings.factorDistance * -1)){
                         if (this.prevLastScrollTop > this.lastScrollTop){
                             console.log("Down");
-                            this.plusDirection = (this.prevLastScrollTop - this.lastScrollTop) * -1;
+                            this.plusDirection = this.prevLastScrollTop - this.lastScrollTop;
                         } else {
                             console.log("Up");
-                            this.plusDirection = this.prevLastScrollTop - this.lastScrollTop;
+                            this.plusDirection = (this.prevLastScrollTop - this.lastScrollTop);
                         }
                         console.log(this.plusDirection);
                         this.showingDots = true;
@@ -73,7 +73,7 @@
                         clearTimeout(this.dotsTimer);
                         this.dotsTimer = setTimeout(function () {
                             this.showingDots = false;
-                        }.bind(this), 300);
+                        }.bind(this), 200);
                     }
                 }
 
@@ -132,7 +132,7 @@
                     $this.contextDots.beginPath();
                     $this.contextDots.arc(
                             this.xPos + Math.cos(this.counter / 100) * this.radius,
-                            (this.yPos + Math.sin(this.counter / 100) * this.radius) + $this.plusDirection,
+                            (this.yPos) + $this.plusDirection,
                             this.width,
                             0,
                             Math.PI * 2,
@@ -144,8 +144,10 @@
 
                     if( $this.plusDirection > 0){
                         $this.plusDirection --;
+                        console.log($this.plusDirection);
                     }else if ($this.plusDirection < 0){
                         $this.plusDirection ++;
+                        console.log($this.plusDirection);
                     }
 
 
