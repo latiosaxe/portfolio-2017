@@ -50,5 +50,64 @@
         *, *:before, *:after {
             box-sizing: border-box;
         }
+        .website{
+            /*padding: 15px;*/
+            width: 100%;
+            height: 100vh;
+            overflow: auto;
+            position: relative;
+            border: 15px solid $primary-color;
+        }
+
+        .container{
+            display: block;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .global_title{
+            position: relative;
+            margin: 8rem 0 8rem;
+            p{
+                margin: 0;
+                font-size: 3rem;
+                display: inline-block;
+                span{
+                    z-index: 4;
+                    background: #fff;
+                    padding: 0 20px 0 0;
+                    position: relative;
+                    display: inline-block;
+                    color: $primary-color;
+                    &:before{
+
+                     }
+                }
+                &:before{
+                    top: 0; right: 0; bottom: 0; left: 0;
+                    content: '';
+                    z-index: 1;
+                    position: absolute;
+                    background: $primary-color;
+                 }
+                &:after{
+                    top: 75%; bottom: 20%; left: 0;
+                    width: 10%;
+                    content: '';
+                    z-index: 2;
+                    position: absolute;
+                    background: #FFF;
+                     animation: title-animation 2s infinite ;
+                    @keyframes title-animation {
+                        0%{
+                            left: 0;
+                        }
+                        100% {
+                            left: 100%;
+                        }
+                    }
+                 }
+            }
+        }
     }
 </style>

@@ -51,7 +51,7 @@
             width: 100%;
             z-index: 4;
             max-width: 600px;
-            padding: 8rem 0;
+            padding: 4rem 0 12rem;
             position: relative;
             &__white{
                  padding: 20px 40px;
@@ -74,7 +74,7 @@
                      height: 2px;
                      position: absolute;
                      left: 50%;
-                     bottom: 19%;
+                     bottom: 10rem;
                      background: #8d8d8d;
                      transform: translateX(-50%);
                  }
