@@ -1,18 +1,17 @@
 <template>
-    <div class="work">
-        <div class="container">
-            <div class="global_title">
-                <p><span>Knowledge</span></p>
-            </div>
 
-            <div class="knowledge">
-                <div v-for="group in knowlegde" class="knowledge__group">
-                    <div class="knowledge__group__title" v-text="group.title"></div>
-                    <div class="knowledge__group__elements">
-                        <ul v-for="element in group.elements">
-                            <li v-text="element"></li>
-                        </ul>
-                    </div>
+    <div class="container">
+        <div class="global_title">
+            <p><span>Knowledge</span></p>
+        </div>
+
+        <div class="knowledge">
+            <div v-for="group in knowlegde" class="knowledge__group">
+                <div class="knowledge__group__title" v-text="group.title"></div>
+                <div class="knowledge__group__elements">
+                    <ul v-for="element in group.elements">
+                        <li v-text="element"></li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -22,7 +21,7 @@
 
 <script>
     export default {
-        name: 'Work',
+        name: 'Knowledge',
         data () {
             return {
                 knowlegde: [

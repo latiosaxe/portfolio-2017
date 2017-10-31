@@ -6,6 +6,7 @@
         </div>
         <router-view name="Work"></router-view>
         <router-view name="Knowledge"></router-view>
+        <router-view name="Personal"></router-view>
     </div>
 </template>
 

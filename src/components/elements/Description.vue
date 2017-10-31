@@ -16,7 +16,7 @@
 
 <script>
     export default {
-        name: 'Hero',
+        name: 'Description',
         data () {
             return {
 

@@ -6,6 +6,7 @@ import Hero from '@/components/elements/Hero'
 import Description from '@/components/elements/Description'
 import Work from '@/components/elements/Work'
 import Knowledge from '@/components/elements/Knowledge'
+import Personal from '@/components/elements/Personal'
 
 Vue.use(Router)
 
@@ -20,6 +21,7 @@ export default new Router({
             Description: Description,
             Work: Work,
             Knowledge: Knowledge,
+            Personal: Personal,
         }
     }
   ]
