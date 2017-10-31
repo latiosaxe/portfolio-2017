@@ -16,9 +16,9 @@ const app = new Vue({
   // el: '#app',
   router,
   template: '<Home/>',
-    components: {
-      Home: Home
-    }
+  components: {
+    Home: Home
+  }
 }).$mount('#app')
 
 
