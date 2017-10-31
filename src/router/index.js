@@ -20,8 +20,8 @@ export default new Router({
         components: {
             Home: Home,
             Hero: Hero,
-            Description: Description,
             Work: Work,
+            Description: Description,
             Knowledge: Knowledge,
             Personal: Personal,
             Contact: Contact,
