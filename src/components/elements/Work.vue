@@ -28,7 +28,8 @@
                                 </div>
                             </div>
                             <div class="single-work__animation__content__url">
-                                <a :href="actualWork.url" :style="{color: actualWork.color}" target="_blank">Visit Website</a>
+                                <a :href="actualWork.url" target="_blank">Check project</a>
+                                <!--:style="{color: actualWork.color}"-->
                             </div>
                         </div>
                     </div>
@@ -39,7 +40,8 @@
             </div>
             <div class="work__recient-work">
                 <div v-for="work in works" class="work__recient-work__element">
-                    <div class="work__recient-work__element__square" :style="{backgroundColor: work.color}" @click="activateWork(work.position)">
+                    <!--:style="{backgroundColor: work.color}"-->
+                    <div :class="['work__recient-work__element__square', 'gradient-'+work.gradient]" @click="activateWork(work.position)">
                         <div class="work__recient-work__element__square__title">{{work.title}}</div>
                         <div class="work__recient-work__element__square__sub-title">{{work.resume}}</div>
                         <div class="work__recient-work__element__square__resume">
@@ -68,45 +70,51 @@
                         title: 'Masthead YouTube',
                         sub_title: 'Victoria, 2017',
                         resume: 'Interactive masthead with sounds and animations',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, fugit mollitia. Corporis dolore dolores explicabo harum ipsam, labore molestias mollitia provident quia quis quod ratione sapiente sint tenetur ut voluptatem.',
+                        description: 'Dia de muertos is a famous celebration full of flavors, colors and sounds. The famous Mexican beer Victoria launched a campaign called \'Hacemos tanto ruido que despertamos a los muertos\' which in English means \'We make so much noise that we wake up the dead\'. \n \n We created an incredible experience for YouTube with the help of a musician, an illustrator and an animator.',
                         gif: '/static/images/projects/victoria-masthead/hero-gif.gif',
                         aditional_image: '/static/images/projects/victoria-masthead/pattern.png',
                         url: 'http://previews.ktbo.mx/banners/victoria/sound-loop/',
-                        color: '#b31f29'
+                        color: '#b31f29',
+                        gradient: 1
+
                     },{
                         position: 2,
                         title: 'Nano 6.0',
                         sub_title: 'Reebok, 2016',
                         resume: 'Parallax website promoting Nano 6.0 shoes',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, fugit mollitia. Corporis dolore dolores explicabo harum ipsam, labore molestias mollitia provident quia quis quod ratione sapiente sint tenetur ut voluptatem.',
+                        description: 'Reebok is famous for making high quality shoes for athletes, Nano 6.0 is a model focused on the CrossFit community, the movement experience was very important for the whole micro-site. I did not develop the CGI, I just asked for the sequence of images.',
                         gif: '/static/images/projects/nano-6/hero-gif.gif',
                         aditional_image: '/static/images/projects/nano-6/preview.png',
                         url: 'http://nano.reebokmexico.com/',
-                        color: '#02bab6'
+                        color: '#02bab6',
+                        gradient: 2
                     },{
                         position: 3,
                         title: 'The bar MX',
                         sub_title: 'Diageo, 2016',
                         resume: 'Cocktails, Mixed Drinks and Cocktail Recipes',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, fugit mollitia. Corporis dolore dolores explicabo harum ipsam, labore molestias mollitia provident quia quis quod ratione sapiente sint tenetur ut voluptatem.',
+                        description: 'The biggest website for cocktail recipes in Mexico was a big challenge because we had very little time to develop it, an European company had tried to developt the project and it took a year to say \'We can not do it\', that\'s why when the project arrives to KTBO in Mexico, we had to develop it in 3 months (The first version). The Bar MX has an important job in SEO as information Schema validated by W3',
                         gif: '/static/images/projects/thebar/hero-gif.gif',
                         aditional_image: '/static/images/projects/thebar/preview.jpg',
                         url: 'https://thebar.com.mx/',
-                        color: '#ff5e00'
+                        color: '#ff5e00',
+                        gradient: 3
                     },{
-                        position: 3,
+                        position: 4,
                         title: 'KTBO MX',
                         sub_title: 'KTBO, 2016',
                         resume: 'Official Website',
-                        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, fugit mollitia. Corporis dolore dolores explicabo harum ipsam, labore molestias mollitia provident quia quis quod ratione sapiente sint tenetur ut voluptatem.',
+                        description: 'They say, \'Try something differente\', so here it is.',
                         gif: '/static/images/projects/ktbo/hero-gif.gif',
                         aditional_image: '/static/images/projects/ktbo/preview.jpg',
                         url: 'https://thebar.com.mx/',
-                        color: '#000000'
+                        color: '#000000',
+                        gradient: 4
                     }
                 ]
             }
         },
+        props: ['scrollPosition'],
         created(){
         },
         mounted(){
@@ -143,12 +151,26 @@
     $easeInOutBack   :  cubic-bezier(0.680, -0.550, 0.265, 1.550);
 
 
-    @mixin striped-bg($bg-color: #ccc){
-        background-color: $bg-color;
-        background: linear-gradient(-45deg, $bg-color 0, transparent 100%);
+    @mixin striped-bg($bg-color-1: #ccc, $bg-color-2: #ccc, $bg-color-3: #000){
+        background-color: $bg-color-1;
+        background: linear-gradient(-45deg, $bg-color-1 0, $bg-color-2 50%, $bg-color-3 100%);
         /*background: linear-gradient(-45deg, $stripe-color 25%, transparent 25%, transparent 50%, $stripe-color 50%, $stripe-color 75%, transparent 75%, transparent);*/
         /*@include background-image(linear-gradient(-45deg, $stripe-color 25%, transparent 25%, transparent 50%, $stripe-color 50%, $stripe-color 75%, transparent 75%, transparent));*/
         background-size: 100% 100%;
+    }
+
+    .gradient-1{
+        @include striped-bg( #ff0000, #ed3849, #db7093);
+    }
+    .gradient-2{
+        @include striped-bg( #e52dd8, #7894e1, #02bab6);
+    }
+    .gradient-3{
+        @include striped-bg( #ff1762, #ff6537, #ffc70f);
+    }
+
+    .gradient-4{
+        @include striped-bg( #000, #444, #888);
     }
 
     .single-work{
@@ -174,6 +196,7 @@
                     top: 1rem;
                     right: 2rem;
                     z-index: 10;
+                    cursor: pointer;
                     position: fixed;
                     font-size: 7rem;
                   }
@@ -198,6 +221,7 @@
                  &__url{
                     width: 100%;
                     text-align: center;
+                    margin: 4rem 0 6rem;
                     a{
                         background: #FFF;
                         padding: 20px 40px;
@@ -340,7 +364,7 @@
                     &__gradient{
                          z-index: 1;
                         opacity: 0.5;
-                        @include striped-bg(#000);
+                        /*@include striped-bg(#000);*/
                         transition: opacity 350ms ease-out;
                         top: 0; right: 0; bottom: 0; left: 0;
                         position: absolute;

@@ -58,6 +58,7 @@
                  background: #FFF;
                 p{
                     margin: 0;
+                    font-size: 1.1rem;
                     color: #8d8d8d;
                     line-height: 180%;
                     margin-bottom: 20px;

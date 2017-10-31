@@ -15,6 +15,7 @@
                 I am, however, a self-taught developer.
             </p>
         </div>
+        <div class="contact__triangle"></div>
     </div>
 </template>
 
@@ -48,6 +49,7 @@
     $easeInOutBack   :  cubic-bezier(0.680, -0.550, 0.265, 1.550);
 
     .contact{
+        overflow: hidden;
        width: 100%;
        height: 100vh;
         position: relative;
@@ -98,6 +100,17 @@
                 font-size: 1.5rem;
                 margin: 0;
             }
+       }
+        & &__triangle{
+           width: 0;
+           height: 0;
+            pointer-events: none;
+           border-bottom: 100vh solid rgba(255,255,255,0.1);
+           border-right: 100vw solid transparent;
+           position: absolute;
+           left: 0;
+           bottom: 0;
+           z-index: 0;
        }
     }
 </style>

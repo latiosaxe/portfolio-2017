@@ -8,6 +8,7 @@
 
         <div class="personal">
             <div class="personal__block">
+                <div class="personal__block__title">Doctor Advisor</div>
                 <img src="/static/images/doctor-advisor.jpg" alt="Doctor Advisor" class="personal__block__image">
                 <div class="personal__block__description">
                     <strong class="personal__block__description__title">Doctor Advisor</strong> is one of my favorite projects. With <strong>Sergio</strong> (Sales Director) and
@@ -18,6 +19,7 @@
                 </div>
             </div>
             <div class="personal__block">
+                <div class="personal__block__title">Photography Inspiration</div>
                 <img src="/static/images/photo-inspiration.jpg" alt="Photo Inspiration" class="personal__block__image">
                 <div class="personal__block__description">
                     <p>
@@ -69,12 +71,23 @@
 
     .personal{
         & &__block{
-            margin-bottom: 30px;
+            position: relative;
+            margin-bottom: 9rem;
             &__image{
                 width: 100%;
                 display: block;
                 border: 10px solid $primary-color;
              }
+             &__title{
+                letter-spacing: 2px;
+                font-size: 4rem;
+                font-family: $font-2;
+                position: absolute;
+                top: -3.5rem;
+                z-index: -1;
+                color: $primary-color;
+                text-transform: uppercase;
+              }
              &__description{
                 width: 100%;
                 display: block;

@@ -1,10 +1,13 @@
 <template>
-    <div class="website">
+    <div class="website" id="websiteScroll" @scroll="detectDirectionScroll(this)">
+
+        <canvas id="top-canvas-line" :class="[(showingDots === true)?'active':'']"></canvas>
+
         <div id="canvas-area">
-            <router-view name="Hero"></router-view>
+            <router-view name="Hero" :scrollPosition="lastScrollTop"></router-view>
             <router-view name="Description"></router-view>
         </div>
-        <router-view name="Work"></router-view>
+        <router-view name="Work" :scrollPosition="lastScrollTop"></router-view>
         <router-view name="Knowledge"></router-view>
         <router-view name="Personal"></router-view>
         <router-view name="Contact"></router-view>
@@ -17,14 +20,150 @@
         name: 'Home',
         data () {
             return {
+                lastScrollTop: 0,
+                prevLastScrollTop: 0,
 
+                scrollDate: 0,
+                prevscrollDate: 0,
+                websiteScroll: '',
+
+                plusDirection: 0,
+                showingDots: false,
+
+                dotsTimer: '',
+
+                contextDots: false,
+                winW: 0,
+                winH: 0,
+                dots: [],
+                particleCount: 0,
+
+                settings: {
+                    dotsLimit: 10,
+                    factorDistance: 50,
+                },
             }
         },
-        created(){
-            console.log("Created");
+        mounted(){
+            this.enableScrollListener();
+            this.drawCanvasLines();
         },
         methods: {
+            enableScrollListener: function () {
+                this.websiteScroll = document.getElementById('websiteScroll');
+            },
+            detectDirectionScroll: function (event) {
+                this.prevLastScrollTop = this.websiteScroll.scrollTop;
+                this.scrollDate = new Date().getTime();
 
+//                console.log((this.scrollDate - this.prevscrollDate));
+                if( (this.scrollDate - this.prevscrollDate) < 50 ){
+                    if( ( this.prevLastScrollTop - this.lastScrollTop ) > this.settings.factorDistance || ( this.prevLastScrollTop - this.lastScrollTop ) < (this.settings.factorDistance * -1)){
+                        if (this.prevLastScrollTop > this.lastScrollTop){
+                            console.log("Down");
+                            this.plusDirection = (this.prevLastScrollTop - this.lastScrollTop) * -1;
+                        } else {
+                            console.log("Up");
+                            this.plusDirection = this.prevLastScrollTop - this.lastScrollTop;
+                        }
+                        console.log(this.plusDirection);
+                        this.showingDots = true;
+                    }else{
+//                        this.plusDirection = 0;
+                        clearTimeout(this.dotsTimer);
+                        this.dotsTimer = setTimeout(function () {
+                            this.showingDots = false;
+                        }.bind(this), 300);
+                    }
+                }
+
+                this.prevscrollDate = this.scrollDate;
+                this.lastScrollTop = this.prevLastScrollTop;
+            },
+            drawCanvasLines: function () {
+                let $this = this;
+                const canvasArea = document.body;
+                this.winW = canvasArea.clientWidth;
+                this.winH = canvasArea.clientHeight;
+
+                const canvas = document.getElementById("top-canvas-line");
+                canvas.width = this.winW;
+                canvas.height = this.winH;
+                console.log(this.winW, this.winH);
+                this.contextDots = canvas.getContext("2d");
+
+                this.drawCircles();
+            },
+            drawCircles: function() {
+                let $this = this;
+                let randomX = 0, randomY = 0, speed = 0, size = 0;
+                for (var i = 0; i < this.settings.dotsLimit; i++) {
+                    randomX =  Math.random() * $this.winW;
+                    randomY = Math.random() * $this.winH;
+                    speed = 0.1 + Math.random();
+                    size = 4;
+                    let circle = new Circle(100, speed, size, randomX, randomY);
+                    $this.dots.push(circle);
+                }
+
+
+                function Circle(radius, speed, width, xPos, yPos) {
+                    this.radius = radius;
+                    this.speed = speed;
+                    this.width = width;
+                    this.xPos = xPos;
+                    this.yPos = yPos;
+                    this.opacity = 0.05 + Math.random() * 0.5;
+
+                    this.counter = 0;
+
+                    let signHelper = Math.floor(Math.random() * 2);
+
+                    if (signHelper == 1) {
+                        this.sign = -1;
+                    } else {
+                        this.sign = 1;
+                    }
+                }
+
+                Circle.prototype.update = function() {
+                    this.counter += this.sign * this.speed;
+
+                    $this.contextDots.beginPath();
+                    $this.contextDots.arc(
+                            this.xPos + Math.cos(this.counter / 100) * this.radius,
+                            (this.yPos + Math.sin(this.counter / 100) * this.radius) + $this.plusDirection,
+                            this.width,
+                            0,
+                            Math.PI * 2,
+                            false);
+
+                    $this.contextDots.closePath();
+                    $this.contextDots.fillStyle = 'rgba(115, 228, 122, 1)';
+                    $this.contextDots.fill();
+
+                    if( $this.plusDirection > 0){
+                        $this.plusDirection --;
+                    }else if ($this.plusDirection < 0){
+                        $this.plusDirection ++;
+                    }
+
+
+                    if($this.particleCount >= ($this.settings.dotsLimit - 1)) $this.particleCount = 0;
+                };
+
+                this.draw();
+            },
+
+            draw: function() {
+                let $this = this;
+                this.contextDots.clearRect(0, 0, this.winW, this.winH);
+                for (var i = 0; i < $this.dots.length; i++) {
+                    var myCircle = $this.dots[i];
+                    myCircle.update();
+                }
+                requestAnimationFrame(this.draw);
+            },
         }
     }
 </script>
@@ -41,6 +180,13 @@
     $easeOutBack     :  cubic-bezier(0.175,  0.885, 0.320, 1.275);
     $easeInOutBack   :  cubic-bezier(0.680, -0.550, 0.265, 1.550);
 
+
+    $bar-height: 5px;
+    $bar-bg: transparent;
+    $bar-color: #5400ff;
+    $bar-color2: #e4514f;
+    $page-bg: #fff;
+
     body{
         margin: 0;
         padding: 0;
@@ -53,6 +199,8 @@
         *, *:before, *:after {
             box-sizing: border-box;
         }
+
+
         .website{
             /*padding: 15px;*/
             width: 100%;
@@ -60,6 +208,24 @@
             overflow: auto;
             position: relative;
             border: 15px solid $primary-color;
+
+            #top-canvas-line{
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                opacity: 0;
+                z-index: 11;
+                width: 100%;
+                position: fixed;
+                pointer-events: none;
+                background: transparent;
+                transition: opacity 300ms ease-in-out;
+                &.active{
+                    opacity: 1;
+                 }
+            }
+            /*padding: 75px 15%;*/
         }
 
         .container{

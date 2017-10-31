@@ -5,7 +5,7 @@
             <p class="hero__name__subtitle"><span>Full-Stack Developer, <small>also mom says that I’m a good boy</small></span></p>
         </div>
         <!--<router-view @canvasShowed="initHome" class="view" name="HeroCanvas"></router-view>-->
-        <canvas class="hero__canvas" id="hero__canvas"></canvas>
+        <canvas class="hero__canvas" id="hero__canvas" :style="{ top: -(scrollPosition/2) + 'px' }"></canvas>
     </div>
 </template>
 
@@ -40,6 +40,7 @@
 
             }
         },
+        props: ['scrollPosition'],
         created(){
 //            this.initHome();
         },
@@ -82,14 +83,23 @@
                     let circle = new Circle(100, speed, size, randomX, randomY);
                     $this.circles.push(circle);
                 }
-                for (var i = 0; i < 20; i++) {
+
+                for (var i = 0; i < 10; i++) {
                     randomX =  Math.random() * $this.winW;
                     randomY = Math.random() * $this.winH;
-                    speed = 0;
-                    size = 5;
+                    speed = 0.1 + Math.random();
+                    size = 10;
                     let circle = new Circle(100, speed, size, randomX, randomY);
                     $this.circles.push(circle);
                 }
+//                for (var i = 0; i < 20; i++) {
+//                    randomX =  Math.random() * $this.winW;
+//                    randomY = Math.random() * $this.winH;
+//                    speed = 0;
+//                    size = 5;
+//                    let circle = new Circle(100, speed, size, randomX, randomY);
+//                    $this.circles.push(circle);
+//                }
 
 
                 function Circle(radius, speed, width, xPos, yPos) {
