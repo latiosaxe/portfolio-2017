@@ -234,6 +234,7 @@
             display: block;
             margin: 0 auto;
             max-width: 1200px;
+            padding: 0 20px;
         }
 
         .global_title{
@@ -278,6 +279,34 @@
                         }
                     }
                  }
+            }
+        }
+    }
+
+
+    @media (max-width: 768px) {
+        body .global_title{
+            margin: 4rem 0 4rem;
+            p{
+               font-size: 2rem;
+            }
+        }
+        .hero .hero__name{
+            width: 90%;
+            h2{
+                font-size: 2rem !important;
+                span{
+                    padding: 10px 5px !important;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 480px) {
+        body .global_title{
+            margin: 2rem 0 2rem;
+            p{
+               font-size: 1.7rem;
             }
         }
     }

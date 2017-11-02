@@ -111,4 +111,22 @@
               }
        }
     }
+
+
+    @media (max-width: 768px) {
+        .personal{
+            margin-top: 100px;
+            .personal__block{
+                margin-bottom: 4rem;
+                .personal__block__title{
+                    top: -1.4rem;
+                    font-size: 1.7rem;
+                }
+                .personal__block__description{
+                    padding: 25px;
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
 </style>

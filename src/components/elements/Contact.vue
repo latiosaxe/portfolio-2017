@@ -113,4 +113,25 @@
            z-index: 0;
        }
     }
+
+    @media (max-width: 768px) {
+        .contact .contact__center p, .contact .contact__bottom p{
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .contact{
+            padding: 40px 0;
+            height: auto;
+            .contact__center, .contact__bottom{
+                display: block;
+                position: static;
+                transform: translateY(0);
+            }
+            .contact__bottom{
+                margin-top: 50px;
+            }
+        }
+    }
 </style>

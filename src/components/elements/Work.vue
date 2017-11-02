@@ -214,6 +214,7 @@
                     width: 100%;
                     text-align: center;
                     img{
+                        max-width: 100%;
                         margin: 0 auto;
                         display: block;
                     }
@@ -409,5 +410,84 @@
                 }
             }
         }
+    }
+
+
+
+    @media (max-width: 1024px) {
+        .work .work__recient-work__element__square{
+            width: 88%;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .work{
+            margin-bottom: 150px;
+        }
+        .work .work__recient-work__element__square{
+            max-width: 90%;
+            padding: 40px 60px;
+            float: left !important;
+        }
+        .work .work__recient-work__element{
+
+            &:last-of-type{
+                 .work__recient-work__element__square{
+                     margin-bottom: 0;
+                 }
+             }
+        }
+
+
+        .single-work{
+            .single-work__animation__content__close{
+                font-size: 4rem;
+                text-shadow: 0 0 15px rgba(0,0,0,0.2);
+            }
+            .single-work__animation__content__title{
+                font-size: 2rem;
+                padding: 5rem 0 2rem;
+            }
+            .single-work__animation__content__grid__description,
+            .single-work__animation__content__grid__extra{
+                width: 100%;
+            }
+        }
+
+    }
+
+    @media (max-width: 480px) {
+        .work{
+            margin-bottom: 40px;
+        }
+
+        .work .work__recient-work__element__square{
+            width: 100%;
+            max-width: 100%;
+            padding: 20px 30px;
+
+            .work__recient-work__element__square__title{
+                font-size: 1.4rem;
+                padding: 2rem 0 0.5rem;
+            }
+            .work__recient-work__element__square__sub-title{
+                font-size: 1rem;
+            }
+
+            &:before{
+                left: 20px;
+                right: 20px;
+             }
+
+            .work__recient-work__element__square__resume{
+                width: 260px;
+                transform: translateX(2rem);
+            }
+            &:after{
+                 top: -10%;
+                 height: 120%;
+             }
+        }
+
     }
 </style>

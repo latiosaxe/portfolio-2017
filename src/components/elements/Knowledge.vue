@@ -9,8 +9,8 @@
             <div v-for="group in knowlegde" class="knowledge__group">
                 <div class="knowledge__group__title" v-text="group.title"></div>
                 <div class="knowledge__group__elements">
-                    <ul v-for="element in group.elements">
-                        <li v-text="element"></li>
+                    <ul>
+                        <li v-for="element in group.elements" v-text="element"></li>
                     </ul>
                 </div>
             </div>
@@ -106,5 +106,36 @@
            }
        }
     }
+
+    @media (max-width: 768px) {
+        .knowledge .knowledge__group{
+            width: 100%;
+            .knowledge__group__elements ul{
+                overflow: hidden;
+                margin-bottom: 40px;
+                li{
+                    width: 50%;
+                    float: left;
+                }
+            }
+        }
+    }
+    @media (max-width: 480px) {
+        .knowledge .knowledge__group{
+            .knowledge__group__elements ul{
+                li{
+                    width: 100%;
+                }
+            }
+            &:last-of-type{
+                .knowledge__group__elements ul{
+                    margin-bottom: 0;
+                }
+             }
+        }
+
+
+    }
+
 
 </style>
