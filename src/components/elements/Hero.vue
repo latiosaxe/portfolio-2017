@@ -15,6 +15,8 @@
         name: 'Hero',
         data () {
             return {
+                sizeCircle: 0,
+                sizeDirection: 0,
                 welcomeShow: '',
                 settings: {
                     circlesLimit: 30,
@@ -79,7 +81,7 @@
                     randomX =  Math.random() * $this.winW;
                     randomY = Math.random() * $this.winH;
                     speed = 0.1 + Math.random() * 2;
-                    size = 5 + Math.random() * 100;
+                    size = Math.floor(Math.random() * 50) + 30;
                     let circle = new Circle(100, speed, size, randomX, randomY);
                     $this.circles.push(circle);
                 }
@@ -132,18 +134,30 @@
                         if($this.particleCount >= ($this.settings.circlesLimit - 1)) $this.speedChange = false;
                     }
 
+                    if($this.sizeCircle >= 0.2){
+                        $this.sizeDirection = 1;
+
+                    }else if ( $this.sizeCircle < 0 ){
+                        $this.sizeDirection = 0;
+                    }
+                    if($this.sizeDirection === 0){
+                        $this.sizeCircle += 0.00001;
+                    }else{
+                        $this.sizeCircle -= 0.00001;
+                    }
+
                     $this.context.beginPath();
                     $this.context.arc(
-                            this.xPos + Math.cos(this.counter / 100) * this.radius,
-                            this.yPos + Math.sin(this.counter / 100) * this.radius,
+                            this.xPos + Math.cos(this.counter / 300) * this.radius,
+                            this.yPos + Math.sin(this.counter / 300) * this.radius,
                             this.width,
                             0,
                             Math.PI * 2,
                             false);
                     $this.context.arc(
-                            this.xPos + Math.cos(this.counter / 100) * this.radius,
-                            this.yPos + Math.sin(this.counter / 100) * this.radius,
-                            (this.width * 0.8),
+                            this.xPos + Math.cos(this.counter / 300) * this.radius,
+                            this.yPos + Math.sin(this.counter / 300) * this.radius,
+                            (this.width * ( 0.8 + $this.sizeCircle)),
                             0,
                             Math.PI * 2,
                             true);
@@ -151,8 +165,6 @@
                     $this.context.closePath();
                     $this.context.fillStyle = 'rgba(115, 228, 122,' + this.opacity + ')';
                     $this.context.fill();
-
-
 
                     if($this.particleCount >= ($this.settings.circlesLimit - 1)) $this.particleCount = 0;
                 };
