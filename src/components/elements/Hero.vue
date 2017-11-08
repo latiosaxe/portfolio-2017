@@ -1,6 +1,6 @@
 <template>
     <div :class="['hero', welcomeShow]">
-        <div class="hero__name">
+        <div class="hero__name" v-show="1>2">
             <h2><span>Hello, I'm Axel González</span></h2>
             <p class="hero__name__subtitle"><span>Full-Stack Developer, <small>also mom says that I’m a good boy</small></span></p>
         </div>
@@ -15,21 +15,15 @@
         name: 'Hero',
         data () {
             return {
+                velocityDecimal: 0.0001,
                 sizeCircle: 0,
                 sizeDirection: 0,
                 welcomeShow: '',
                 settings: {
-                    circlesLimit: 30,
-                    extraSpeed: 2,
-//                    startY: 0,
-//                    lines: 30,
-//                    maxRadius: 20,
-//                    minRadius: 3,
-//                    startColor: '#FFFFFF',
-//                    middleColor: '#73e47a',
-//                    endColor: '#4d9a4d'
+                    sizeCircles: 50,
+                    circlesLimit: 40,
                 },
-
+                delayHelper: true,
                 context: false,
                 showedCanvas: false,
                 winW: 0,
@@ -76,43 +70,38 @@
 
             drawCircles: function() {
                 let $this = this;
-                let randomX = 0, randomY = 0, speed = 0, size = 0;
+                let randomX = 0, randomY = 0, speed = 0, size = 0, delay;
                 for (var i = 0; i < this.settings.circlesLimit; i++) {
                     randomX =  Math.random() * $this.winW;
                     randomY = Math.random() * $this.winH;
-                    speed = 0.1 + Math.random() * 2;
-                    size = Math.floor(Math.random() * 50) + 30;
-                    let circle = new Circle(100, speed, size, randomX, randomY);
+                    speed = 0.1 + Math.random() * 1;
+                    size = Math.floor(Math.random() * $this.settings.sizeCircles) + ($this.settings.sizeCircles / 2);
+                    delay = Math.random() * 0.09;
+                    let circle = new Circle(100, speed, size, randomX, randomY, delay);
                     $this.circles.push(circle);
                 }
 
-                for (var i = 0; i < 10; i++) {
-                    randomX =  Math.random() * $this.winW;
-                    randomY = Math.random() * $this.winH;
-                    speed = 0.1 + Math.random();
-                    size = 10;
-                    let circle = new Circle(100, speed, size, randomX, randomY);
-                    $this.circles.push(circle);
-                }
-//                for (var i = 0; i < 20; i++) {
+//                for (var i = 0; i < 10; i++) {
 //                    randomX =  Math.random() * $this.winW;
 //                    randomY = Math.random() * $this.winH;
-//                    speed = 0;
-//                    size = 5;
+//                    speed = 0.1 + Math.random();
+//                    size = 10;
 //                    let circle = new Circle(100, speed, size, randomX, randomY);
 //                    $this.circles.push(circle);
 //                }
 
-
-                function Circle(radius, speed, width, xPos, yPos) {
+                function Circle(radius, speed, width, xPos, yPos, delay) {
                     this.radius = radius;
                     this.speed = speed;
                     this.width = width;
                     this.xPos = xPos;
                     this.yPos = yPos;
+                    this.delay = delay;
                     this.opacity = 0.05 + Math.random() * 0.5;
 
                     this.counter = 0;
+                    this.sizeCircle = 0;
+                    this.sizeDirection = 0;
 
                     let signHelper = Math.floor(Math.random() * 2);
 
@@ -125,25 +114,34 @@
 
                 Circle.prototype.update = function() {
                     this.counter += this.sign * this.speed;
-
-                    this.particleCount ++;
+                    $this.particleCount ++;
                     if($this.speedChange === true){
                         if($this.mouseDown === true){
                             (this.counter < 0) ? this.counter -= 2 : this.counter += 2
                         }
-                        if($this.particleCount >= ($this.settings.circlesLimit - 1)) $this.speedChange = false;
+                        if(this.particleCount >= ($this.settings.circlesLimit - 1)) $this.speedChange = false;
                     }
 
-                    if($this.sizeCircle >= 0.2){
-                        $this.sizeDirection = 1;
+                    if(this.sizeCircle >= 0.2){
+                        this.sizeDirection = 1;
 
-                    }else if ( $this.sizeCircle < 0 ){
-                        $this.sizeDirection = 0;
+                    }else if ( this.sizeCircle < 0 ){
+                        this.sizeDirection = 0;
                     }
-                    if($this.sizeDirection === 0){
-                        $this.sizeCircle += 0.00001;
+                    if($this.delayHelper){
+                        if(this.sizeDirection === 0){
+                            this.sizeCircle += ($this.velocityDecimal + this.delay);
+                        }else{
+                            this.sizeCircle -= ($this.velocityDecimal + this.delay);
+                        }
+                        if($this.particleCount >= ($this.settings.circlesLimit - 1)){
+                            $this.delayHelper = false;
+                        }
+                    }
+                    if(this.sizeDirection === 0){
+                        this.sizeCircle += $this.velocityDecimal;
                     }else{
-                        $this.sizeCircle -= 0.00001;
+                        this.sizeCircle -= $this.velocityDecimal;
                     }
 
                     $this.context.beginPath();
@@ -157,7 +155,7 @@
                     $this.context.arc(
                             this.xPos + Math.cos(this.counter / 300) * this.radius,
                             this.yPos + Math.sin(this.counter / 300) * this.radius,
-                            (this.width * ( 0.8 + $this.sizeCircle)),
+                            (this.width * ( 0.8 + this.sizeCircle)),
                             0,
                             Math.PI * 2,
                             true);

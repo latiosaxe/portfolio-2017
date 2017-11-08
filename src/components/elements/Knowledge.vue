@@ -30,11 +30,13 @@
                         elements: [
                             'Vanilla JS',
                             'Vuejs',
-                            'Angular JS',
-                            'PHP 5.6 - 7 ( Laravel )',
                             'ES6',
-                            'Node.js',
+                            'Angular 1',
                             'React JS *',
+                            'Node.js',
+                            'RESTful Web Services',
+                            'Laravel',
+                            'PHP 5.6 - 7',
                             'jQuery / mootools',
                             'Grunt / Gulp',
                             'Nginx / Apache',
@@ -50,13 +52,14 @@
                             'Zeplin / invision',
                             'Livestream',
                             'Final Cut / Adobe Pr',
-                            'Maya *'
+                            'Maya, Blender *'
                         ]
                     },{
                         title: "Extra",
                         elements: [
                             'Google: Google Analytics, HTML5 Studio Certificatied & Rich Media Expert',
-                            'Amazon: AWS (S3, SES), Amazon Associates'
+                            'Amazon: AWS (S3, SES), Amazon Associates',
+                            'Spanish'
                         ]
                     }
                 ]
