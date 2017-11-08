@@ -1,6 +1,6 @@
 <template>
     <div :class="['hero', welcomeShow]">
-        <div class="hero__name" v-show="1>2">
+        <div class="hero__name">
             <h2><span>Hello, I'm Axel González</span></h2>
             <p class="hero__name__subtitle"><span>Full-Stack Developer, <small>also mom says that I’m a good boy</small></span></p>
         </div>
