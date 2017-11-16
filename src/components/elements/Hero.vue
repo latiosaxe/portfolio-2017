@@ -61,7 +61,15 @@
                     this.speedChange = true;
                     this.mouseDown = true;
                 }.bind(this), false);
+                canvas.addEventListener('touchstart', function(event) {
+                    this.speedChange = true;
+                    this.mouseDown = true;
+                }.bind(this), false);
                 canvas.addEventListener('mouseup', function(event) {
+                    this.speedChange = false;
+                    this.mouseDown = false;
+                }.bind(this), false);
+                canvas.addEventListener('touchend', function(event) {
                     this.speedChange = false;
                     this.mouseDown = false;
                 }.bind(this), false);

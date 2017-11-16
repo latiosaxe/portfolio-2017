@@ -46,7 +46,7 @@
                     'static/images/projects/nano-6/hero-gif.gif',
                     'static/images/projects/thebar/hero-gif.gif',
                     'static/images/projects/ktbo/hero-gif.gif',
-                    'static/images/videogames.gif',
+//                    'static/images/videogames.gif',
                     'static/images/tame-impala.jpg',
                     'static/images/overwatch.jpg'
                 ],
