@@ -47,7 +47,8 @@
                     'static/images/projects/thebar/hero-gif.gif',
                     'static/images/projects/ktbo/hero-gif.gif',
                     'static/images/videogames.gif',
-                    'static/images/concerts.gif'
+                    'static/images/tame-impala.jpg',
+                    'static/images/overwatch.jpg'
                 ],
                 totalIMGLoaded: 0,
                 loaded: false,
