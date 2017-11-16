@@ -1,11 +1,8 @@
 <template>
-
     <div class="container">
         <div class="global_title">
             <p><span>Personal Projects</span></p>
         </div>
-
-
         <div class="personal">
             <div class="personal__block">
                 <div class="personal__block__title">Doctor Advisor</div>

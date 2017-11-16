@@ -1,16 +1,37 @@
 <template>
-    <div class="website" id="websiteScroll" @scroll="detectDirectionScroll(this)">
-
-        <canvas id="top-canvas-line" :class="[(showingDots === true)?'active':'']"></canvas>
-
-        <div id="canvas-area">
-            <router-view name="Hero" :scrollPosition="lastScrollTop"></router-view>
-            <router-view name="Description"></router-view>
+    <div class="loading">
+        <div v-if="loaded">
+            <div class="intro" :class="{ 'active': fadeIn }">
+                <div class="website" id="websiteScroll" @scroll="detectDirectionScroll(this)">
+                    <canvas id="top-canvas-line" :class="[(showingDots === true)?'active':'']"></canvas>
+                    <div id="canvas-area">
+                        <router-view name="Hero" :scrollPosition="lastScrollTop"></router-view>
+                        <router-view name="Description" :runAboutAnimation="runAboutAnimation"></router-view>
+                    </div>
+                    <router-view name="Work" id="workModel" :scrollPosition="lastScrollTop"></router-view>
+                    <router-view name="Knowledge"></router-view>
+                    <router-view name="Personal"></router-view>
+                    <router-view name="Hobbies"></router-view>
+                    <router-view name="Contact"></router-view>
+                </div>
+            </div>
         </div>
-        <router-view name="Work" :scrollPosition="lastScrollTop"></router-view>
-        <router-view name="Knowledge"></router-view>
-        <router-view name="Personal"></router-view>
-        <router-view name="Contact"></router-view>
+        <div v-else>
+            <div class="holder">
+                <div class="circle-stripes-preloader">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -20,11 +41,23 @@
         name: 'Home',
         data () {
             return {
+                preloadIMG: [
+                    'static/images/projects/victoria-masthead/hero-gif.gif',
+                    'static/images/projects/nano-6/hero-gif.gif',
+                    'static/images/projects/thebar/hero-gif.gif',
+                    'static/images/projects/ktbo/hero-gif.gif',
+                    'static/images/videogames.gif',
+                    'static/images/concerts.gif'
+                ],
+                totalIMGLoaded: 0,
+                loaded: false,
+                fadeIn: false,
+
                 lastScrollTop: 0,
                 prevLastScrollTop: 0,
 
                 scrollDate: 0,
-                prevscrollDate: 0,
+                prevScrollDate: 0,
                 websiteScroll: '',
 
                 plusDirection: 0,
@@ -40,13 +73,34 @@
 
                 settings: {
                     dotsLimit: 10,
-                    factorDistance: 50,
+                    factorDistance: 50
                 },
+                workElement: '',
+                windowHeight: 0,
+                runAboutAnimation: false
             }
         },
-        mounted(){
-            this.enableScrollListener();
-            this.drawCanvasLines();
+        created(){
+            this.preloadIMG.forEach(function (imageURL) {
+                var img = new Image();
+                img.src = imageURL;
+                img.onload = function() {
+                    this.totalIMGLoaded ++;
+                    if( this.totalIMGLoaded === this.preloadIMG.length ){
+                        console.log("Loaded");
+                        this.loaded = true;
+                        setTimeout(function(){
+                            this.enableScrollListener();
+                            this.drawCanvasLines();
+                            this.workElement = document.getElementById('description__animation');
+                            this.windowHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+                            setTimeout(function () {
+                                this.fadeIn = true
+                            }.bind(this), 150);
+                        }.bind(this), 150);
+                    }
+                }.bind(this);
+            }.bind(this));
         },
         methods: {
             enableScrollListener: function () {
@@ -56,8 +110,10 @@
                 this.prevLastScrollTop = this.websiteScroll.scrollTop;
                 this.scrollDate = new Date().getTime();
 
-//                console.log((this.scrollDate - this.prevscrollDate));
-                if( (this.scrollDate - this.prevscrollDate) < 50 ){
+
+                (  this.websiteScroll.scrollTop + (this.windowHeight / 2) > this.workElement.offsetTop) ? this.runAboutAnimation = true : this.runAboutAnimation = false;
+//                console.log((this.scrollDate - this.prevScrollDate));
+                if( (this.scrollDate - this.prevScrollDate) < 50 ){
                     if( ( this.prevLastScrollTop - this.lastScrollTop ) > this.settings.factorDistance || ( this.prevLastScrollTop - this.lastScrollTop ) < (this.settings.factorDistance * -1)){
                         if (this.prevLastScrollTop > this.lastScrollTop){
                             console.log("Down");
@@ -77,7 +133,7 @@
                     }
                 }
 
-                this.prevscrollDate = this.scrollDate;
+                this.prevScrollDate = this.scrollDate;
                 this.lastScrollTop = this.prevLastScrollTop;
             },
             drawCanvasLines: function () {
@@ -87,6 +143,7 @@
                 this.winH = canvasArea.clientHeight;
 
                 const canvas = document.getElementById("top-canvas-line");
+                console.log(canvas);
                 canvas.width = this.winW;
                 canvas.height = this.winH;
                 console.log(this.winW, this.winH);
@@ -165,7 +222,7 @@
                     myCircle.update();
                 }
                 requestAnimationFrame(this.draw);
-            },
+            }
         }
     }
 </script>
@@ -283,6 +340,87 @@
         }
     }
 
+    .loading{
+        .intro{
+            opacity: 0;
+            transition: opacity 400ms ease-out;
+            &.active{
+                opacity: 1;
+             }
+        }
+    }
+
+    $count: 10;
+    $circleSize: 150;
+    $timeMultiplier: 1.5;
+
+    .holder {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: #FFF;
+    }
+    .circle-stripes-preloader {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        width: $circleSize + px;
+        height: $circleSize + px;
+        transform: translateX(-50%) translateY(-50%);
+        animation: rotatePreloader 10s infinite linear;
+    }
+    @keyframes rotatePreloader {
+        0% {
+            transform: translateX(-50%) translateY(-50%) rotateZ(0deg);
+        }
+        100% {
+            transform: translateX(-50%) translateY(-50%) rotateZ(360deg);
+        }
+    }
+
+    .circle-stripes-preloader div {
+        top: 50%;
+        left: 50%;
+        width: 50%;
+        position: absolute;
+        height: percentage((100 / $count) / 100);
+        transform: translateX(-50%) translateY(-50%);
+        perspective: $circleSize + px;
+    }
+    .circle-stripes-preloader div:before {
+        content: "";
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-color: $primary-color;
+        transform: rotateY(0deg) translateZ(($circleSize / 2) + px);
+        transition: transform 2s;
+        animation-name: stripeRotate;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+    @keyframes stripeRotate {
+        0% {
+            transform: rotateY(0deg) translateZ(($circleSize / 2) + px);
+        }
+        100% {
+            transform: rotateY(360deg) translateZ(($circleSize / 2) + px);
+        }
+    }
+    @for $i from 1 through $count {
+        .circle-stripes-preloader div:nth-child(#{$i}) {
+            transform: translateX(-50%) translateY(-50%) rotateZ(((360 / $count) * $i) + deg);
+            z-index: $count - $i;
+        }
+        .circle-stripes-preloader div:nth-child(#{$i}):before {
+            animation-duration: ($i * $timeMultiplier) + s;
+            background-color: $primary-color;
+        }
+    }
 
     @media (max-width: 768px) {
         body .global_title{

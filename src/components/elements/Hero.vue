@@ -45,7 +45,6 @@
         },
         methods: {
             initHero: function () {
-                let $this = this;
                 const canvasArea = document.getElementById("canvas-area");
                 this.winW = canvasArea.clientWidth;
                 this.winH = canvasArea.clientHeight;
@@ -59,23 +58,23 @@
                 this.drawCircles();
 
                 canvas.addEventListener('mousedown', function(event) {
-                    $this.speedChange = true;
-                    $this.mouseDown = true;
-                }, false);
+                    this.speedChange = true;
+                    this.mouseDown = true;
+                }.bind(this), false);
                 canvas.addEventListener('mouseup', function(event) {
-                    $this.speedChange = true;
-                    $this.mouseDown = false;
-                }, false);
+                    this.speedChange = false;
+                    this.mouseDown = false;
+                }.bind(this), false);
             },
 
             drawCircles: function() {
                 let $this = this;
                 let randomX = 0, randomY = 0, speed = 0, size = 0, delay;
                 for (var i = 0; i < this.settings.circlesLimit; i++) {
-                    randomX =  Math.random() * $this.winW;
-                    randomY = Math.random() * $this.winH;
+                    randomX =  Math.random() * this.winW;
+                    randomY = Math.random() * this.winH;
                     speed = 0.1 + Math.random() * 1;
-                    size = Math.floor(Math.random() * $this.settings.sizeCircles) + ($this.settings.sizeCircles / 2);
+                    size = Math.floor(Math.random() * this.settings.sizeCircles) + (this.settings.sizeCircles / 2);
                     delay = Math.random() * 0.09;
                     let circle = new Circle(100, speed, size, randomX, randomY, delay);
                     $this.circles.push(circle);
@@ -171,16 +170,16 @@
             },
 
             draw: function() {
-                let $this = this;
                 this.context.clearRect(0, 0, this.winW, this.winH);
-                for (var i = 0; i < $this.circles.length; i++) {
-                    var myCircle = $this.circles[i];
+                for (var i = 0; i < this.circles.length; i++) {
+                    var myCircle = this.circles[i];
                     myCircle.update();
                 }
-                if($this.showedCanvas === false){
-                    $this.showedCanvas = true;
-
-                    $this.initTitle();
+                if(this.showedCanvas === false){
+                    this.showedCanvas = true;
+                    setTimeout(function () {
+                        this.initTitle();
+                    }.bind(this), 500)
                 }
                 requestAnimationFrame(this.draw);
             },

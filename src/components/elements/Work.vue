@@ -5,8 +5,8 @@
                 <p><span>My Work</span></p>
             </div>
 
-            <div :class="[ (activateSingleWork === true || auxInActive === true)?'active':'', 'single-work']">
-                <div  :class="[ (activateSingleWork === true)?'active':'', 'single-work__animation']">
+            <div :class="[ {'active': (activateSingleWork === true || auxInActive === true)}, 'single-work']">
+                <div  :class="[ {'active': activateSingleWork}, 'single-work__animation']">
                     <div class="single-work__animation__content">
                         <div class="single-work__animation__content__close" @click="inActivateWork">X</div>
                         <div class="container">
