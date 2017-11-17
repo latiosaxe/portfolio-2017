@@ -44,11 +44,11 @@
                 preloadIMG: [
                     'static/images/projects/victoria-masthead/hero-gif.gif',
                     'static/images/projects/nano-6/hero-gif.gif',
-                    'static/images/projects/thebar/hero-gif.gif',
-                    'static/images/projects/ktbo/hero-gif.gif',
+//                    'static/images/projects/thebar/hero-gif.gif',
+//                    'static/images/projects/ktbo/hero-gif.gif',
 //                    'static/images/videogames.gif',
-                    'static/images/tame-impala.jpg',
-                    'static/images/overwatch.jpg'
+//                    'static/images/tame-impala.jpg',
+//                    'static/images/overwatch.jpg'
                 ],
                 totalIMGLoaded: 0,
                 loaded: false,
