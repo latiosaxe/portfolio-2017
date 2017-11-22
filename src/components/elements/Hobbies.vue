@@ -38,41 +38,41 @@
         /*background: $primary-color;*/
         &__title{
             font-size: 2.2rem;
-         }
-         &__squear{
+        }
+        &__squear{
             font-size: 0;
             width: 100%;
-              position: relative;
+            position: relative;
             &__wrapper{
-                 width: 50%;
+                width: 50%;
                 top: 0;
                 left: 0;
                 bottom: 0;
                 position: absolute;
-                 display: inline-block;
+                display: inline-block;
                 background: $primary-color;
-                    &__title{
-                        bottom: 3rem;
-                        left: 2rem;
-                        right: 2rem;
-                         z-index: 2;
-                        margin: 0;
-                        color: #FFF;
-                         font-size: 2rem;
-                         font-weight: bold;
-                         position: absolute;
-                        font-family: $font-1;
-                        text-align: left;
-                     }
+                &__title{
+                    bottom: 3rem;
+                    left: 2rem;
+                    right: 2rem;
+                    z-index: 2;
+                    margin: 0;
+                    color: #FFF;
+                    font-size: 2rem;
+                    font-weight: bold;
+                    position: absolute;
+                    font-family: $font-1;
+                    text-align: left;
+                }
             }
             &__image{
                 z-index: 2;
-                 width: 50%;
-                 position: relative;
-                 display: inline-block;
+                width: 50%;
+                position: relative;
+                display: inline-block;
                 transform: scale(1.05);
-             }
-         }
+            }
+        }
 
     }
     .hobbies__squear{
@@ -80,16 +80,16 @@
             .hobbies__squear__wrapper{
                 left: 50%;
             }
-         }
+        }
         &.squear-2{
-             text-align: right;
+            text-align: right;
             .hobbies__squear__wrapper{
                 background: #FFF;
                 .hobbies__squear__wrapper__title{
                     color: $primary-color;
                 }
-             }
-         }
+            }
+        }
     }
     .global_title.small{
         margin-bottom: 2.5rem;

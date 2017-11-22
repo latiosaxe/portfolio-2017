@@ -189,12 +189,12 @@
 
                     $this.contextDots.beginPath();
                     $this.contextDots.arc(
-                            this.xPos + Math.cos(this.counter / 100) * this.radius,
-                            (this.yPos) + $this.plusDirection,
-                            this.width,
-                            0,
-                            Math.PI * 2,
-                            false);
+                        this.xPos + Math.cos(this.counter / 100) * this.radius,
+                        (this.yPos) + $this.plusDirection,
+                        this.width,
+                        0,
+                        Math.PI * 2,
+                        false);
 
                     $this.contextDots.closePath();
                     $this.contextDots.fillStyle = 'rgba(115, 228, 122, 1)';
@@ -283,7 +283,7 @@
                 transition: opacity 300ms ease-in-out;
                 &.active{
                     opacity: 1;
-                 }
+                }
             }
             /*padding: 75px 15%;*/
         }
@@ -311,7 +311,7 @@
                     color: $primary-color;
                     &:before{
 
-                     }
+                    }
                 }
                 &:before{
                     top: 0; right: 0; bottom: 0; left: 0;
@@ -319,7 +319,7 @@
                     z-index: 1;
                     position: absolute;
                     background: $primary-color;
-                 }
+                }
                 &:after{
                     top: 75%; bottom: 20%; left: 0;
                     width: 10%;
@@ -327,7 +327,7 @@
                     z-index: 2;
                     position: absolute;
                     background: #FFF;
-                     animation: title-animation 2s infinite ;
+                    animation: title-animation 2s infinite ;
                     @keyframes title-animation {
                         0%{
                             left: 0;
@@ -336,7 +336,7 @@
                             left: 100%;
                         }
                     }
-                 }
+                }
             }
         }
     }
@@ -347,7 +347,7 @@
             transition: opacity 400ms ease-out;
             &.active{
                 opacity: 1;
-             }
+            }
         }
     }
 
@@ -427,7 +427,7 @@
         body .global_title{
             margin: 4rem 0 4rem;
             p{
-               font-size: 2rem;
+                font-size: 2rem;
             }
         }
         .hero .hero__name{
@@ -445,7 +445,7 @@
         body .global_title{
             margin: 2rem 0 2rem;
             p{
-               font-size: 1.7rem;
+                font-size: 1.7rem;
             }
         }
     }

@@ -74,8 +74,8 @@
                 width: 100%;
                 display: block;
                 border: 10px solid $primary-color;
-             }
-             &__title{
+            }
+            &__title{
                 letter-spacing: 2px;
                 font-size: 4rem;
                 font-family: $font-2;
@@ -84,8 +84,8 @@
                 z-index: -1;
                 color: $primary-color;
                 text-transform: uppercase;
-              }
-             &__description{
+            }
+            &__description{
                 width: 100%;
                 display: block;
                 max-width: 800px;
@@ -95,18 +95,18 @@
                 font-size: 1.2rem;
                 padding: 25px 40px;
                 background: $primary-color;
-                  p{
-                      margin: 0 0 20px 0;
-                      &:last-of-type{
+                p{
+                    margin: 0 0 20px 0;
+                    &:last-of-type{
                         margin-bottom: 0;
-                       }
-                  }
+                    }
+                }
                 &__title{
                     font-size: 1.5rem;
                     font-family: $font-2;
-                 }
-              }
-       }
+                }
+            }
+        }
     }
 
 

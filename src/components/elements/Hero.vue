@@ -241,19 +241,19 @@
 
                     $this.context.beginPath();
                     $this.context.arc(
-                            this.xPos + Math.cos(this.counter / 300) * this.radius,
-                            this.yPos + Math.sin(this.counter / 300) * this.radius,
-                            this.width,
-                            0,
-                            Math.PI * 2,
-                            false);
+                        this.xPos + Math.cos(this.counter / 300) * this.radius,
+                        this.yPos + Math.sin(this.counter / 300) * this.radius,
+                        this.width,
+                        0,
+                        Math.PI * 2,
+                        false);
                     $this.context.arc(
-                            this.xPos + Math.cos(this.counter / 300) * this.radius,
-                            this.yPos + Math.sin(this.counter / 300) * this.radius,
-                            (this.width * ( 0.8 + this.sizeCircle)),
-                            0,
-                            Math.PI * 2,
-                            true);
+                        this.xPos + Math.cos(this.counter / 300) * this.radius,
+                        this.yPos + Math.sin(this.counter / 300) * this.radius,
+                        (this.width * ( 0.8 + this.sizeCircle)),
+                        0,
+                        Math.PI * 2,
+                        true);
 
                     $this.context.closePath();
                     $this.context.fillStyle = 'rgba(115, 228, 122,' + this.opacity + ')';
@@ -312,110 +312,110 @@
         height: 100vh;
         position: relative;
         min-height: 400px;
-    & &__name {
-           top: 50%;
-           left: 50%;
-           z-index: 2;
-           text-align: center;
-           position: absolute;
-           transform: translate3d(-50%, -50%, 0);
-    h2{
-        opacity: 0;
-        color: #FFF;
-        margin: 0;
-        font-size: 48px;
-        letter-spacing: 3px;
-        display: inline-block;
-        transition: all 350ms ease-out;
-    span{
-        z-index: 5;
-        opacity: 0;
-        color: $primary-color;
-        display: block;
-        position: relative;
-        padding: 10px 55px;
-        transition: all 30ms 700ms ease-out;
-    }
-    &:before, &:after{
-                   content: '';
-                   top: 0;
-                   left: 0;
-                   width: 0;
-                   bottom: 0;
-                   position: absolute;
-               }
-    &:before{
-         z-index: 1;
-         background: $primary-color;
-         transition: all 700ms $easeInOutBack;
-     }
-    &:after{
-         z-index: 2;
-         background: #FFF;
-         transition: all 500ms 700ms $easeInOutBack;
-     }
-    }
-    &__subtitle {
-         opacity: 0;
-         z-index: 1;
-         position: relative;
-         font-family: $font-2;
-         letter-spacing: 3px;
-         transform: translateY(-20px);
-         text-transform: uppercase;
-         transition: all 700ms 200ms $easeInOutBack;
-        small{
-            letter-spacing: 2px;
+        & &__name {
+            top: 50%;
+            left: 50%;
+            z-index: 2;
+            text-align: center;
+            position: absolute;
+            transform: translate3d(-50%, -50%, 0);
+            h2{
+                opacity: 0;
+                color: #FFF;
+                margin: 0;
+                font-size: 48px;
+                letter-spacing: 3px;
+                display: inline-block;
+                transition: all 350ms ease-out;
+                span{
+                    z-index: 5;
+                    opacity: 0;
+                    color: $primary-color;
+                    display: block;
+                    position: relative;
+                    padding: 10px 55px;
+                    transition: all 30ms 700ms ease-out;
+                }
+                &:before, &:after{
+                    content: '';
+                    top: 0;
+                    left: 0;
+                    width: 0;
+                    bottom: 0;
+                    position: absolute;
+                }
+                &:before{
+                    z-index: 1;
+                    background: $primary-color;
+                    transition: all 700ms $easeInOutBack;
+                }
+                &:after{
+                    z-index: 2;
+                    background: #FFF;
+                    transition: all 500ms 700ms $easeInOutBack;
+                }
+            }
+            &__subtitle {
+                opacity: 0;
+                z-index: 1;
+                position: relative;
+                font-family: $font-2;
+                letter-spacing: 3px;
+                transform: translateY(-20px);
+                text-transform: uppercase;
+                transition: all 700ms 200ms $easeInOutBack;
+                small{
+                    letter-spacing: 2px;
+                }
+            }
         }
-     }
-    }
-    & &__canvas{
-           z-index: 1;
-           position: absolute;
-           top:0; left: 0; right: 0; bottom: 0;
-       }
-    &--pre_active{
-    .hero__name{
-    h2{
-        opacity: 1;
-        transform: translateY(0);
-    span{
-        opacity: 1;
-        transition-delay: 900ms !important;
-    }
-    &:before, &:after{
-                   width: 100%;
-                   left: 0;
-                   right: 0;
-               }
-    }
-    }
-    }
-    &--active{
-    .hero__name{
-    h2{
-        opacity: 1;
-        transform: translateY(0);
-    span{
-        color: #FFF;
-        opacity: 1;
-        animation: all 1s 0s ease-out;
-    }
-    &:before{
-         width: 100%;
-     }
-    &:after{
-         left: inherit;
-         right: 0;
-         width: 0;
-     }
-    }
-    &__subtitle{
-         opacity: 1;
-         transform: translateY(0);
-     }
-    }
-    }
+        & &__canvas{
+            z-index: 1;
+            position: absolute;
+            top:0; left: 0; right: 0; bottom: 0;
+        }
+        &--pre_active{
+            .hero__name{
+                h2{
+                    opacity: 1;
+                    transform: translateY(0);
+                    span{
+                        opacity: 1;
+                        transition-delay: 900ms !important;
+                    }
+                    &:before, &:after{
+                        width: 100%;
+                        left: 0;
+                        right: 0;
+                    }
+                }
+            }
+        }
+        &--active{
+            .hero__name{
+                h2{
+                    opacity: 1;
+                    transform: translateY(0);
+                    span{
+                        color: #FFF;
+                        opacity: 1;
+                        animation: all 1s 0s ease-out;
+                    }
+                    &:before{
+                        width: 100%;
+                    }
+                    &:after{
+                        left: inherit;
+                        right: 0;
+                        width: 0;
+                    }
+                }
+                &__subtitle{
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
 
     }
 </style>

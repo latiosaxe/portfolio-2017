@@ -89,19 +89,19 @@
 
                     $this.context.beginPath();
                     $this.context.arc(
-                            this.xPos + Math.cos(this.counter / 100) * this.radius,
-                            this.yPos + Math.sin(this.counter / 100) * this.radius,
-                            this.width,
-                            0,
-                            Math.PI * 2,
-                            false);
+                        this.xPos + Math.cos(this.counter / 100) * this.radius,
+                        this.yPos + Math.sin(this.counter / 100) * this.radius,
+                        this.width,
+                        0,
+                        Math.PI * 2,
+                        false);
                     $this.context.arc(
-                            this.xPos + Math.cos(this.counter / 100) * this.radius,
-                            this.yPos + Math.sin(this.counter / 100) * this.radius,
-                            (this.width * 0.8),
-                            0,
-                            Math.PI * 2,
-                            true);
+                        this.xPos + Math.cos(this.counter / 100) * this.radius,
+                        this.yPos + Math.sin(this.counter / 100) * this.radius,
+                        (this.width * 0.8),
+                        0,
+                        Math.PI * 2,
+                        true);
 
                     $this.context.closePath();
                     $this.context.fillStyle = 'rgba(115, 228, 122,' + this.opacity + ')';

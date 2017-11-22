@@ -76,8 +76,6 @@
 </script>
 
 <style lang="scss">
-
-
     $font-1: 'Quicksand', sans-serif;
     $font-2: 'Archivo Black', sans-serif;
 
@@ -90,25 +88,25 @@
     .knowledge{
         font-size: 0;
         & &__group{
-           display: inline-block;
-           vertical-align: top;
-           width: 33.33%;
+            display: inline-block;
+            vertical-align: top;
+            width: 33.33%;
             &__title{
                 font-size: 2rem;
-           }
+            }
             &__elements{
-             margin-top: 1rem;
-             ul{
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                 li{
-                    padding: 10px 0;
-                    font-size: 1rem;
-                 }
-             }
-           }
-       }
+                margin-top: 1rem;
+                ul{
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    li{
+                        padding: 10px 0;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
     }
 
     @media (max-width: 768px) {
@@ -135,7 +133,7 @@
                 .knowledge__group__elements ul{
                     margin-bottom: 0;
                 }
-             }
+            }
         }
 
 

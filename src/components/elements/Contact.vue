@@ -50,8 +50,8 @@
 
     .contact{
         overflow: hidden;
-       width: 100%;
-       height: 100vh;
+        width: 100%;
+        height: 100vh;
         position: relative;
         color: #FFF;
         text-align: center;
@@ -85,11 +85,11 @@
                 a{
                     font-family: $font-1;
                     &:hover{
-                         text-decoration: underline;
-                     }
+                        text-decoration: underline;
+                    }
                 }
             }
-       }
+        }
         & &__bottom{
             bottom: 5%;
             left: 0;
@@ -100,18 +100,18 @@
                 font-size: 1.5rem;
                 margin: 0;
             }
-       }
+        }
         & &__triangle{
-           width: 0;
-           height: 0;
+            width: 0;
+            height: 0;
             pointer-events: none;
-           border-bottom: 100vh solid rgba(255,255,255,0.1);
-           border-right: 100vw solid transparent;
-           position: absolute;
-           left: 0;
-           bottom: 0;
-           z-index: 0;
-       }
+            border-bottom: 100vh solid rgba(255,255,255,0.1);
+            border-right: 100vw solid transparent;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            z-index: 0;
+        }
     }
 
     @media (max-width: 768px) {

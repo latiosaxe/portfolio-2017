@@ -85,8 +85,8 @@
             position: relative;
             &__white{
                 opacity: 1;
-                 padding: 20px 40px;
-                 background: #FFF;
+                padding: 20px 40px;
+                background: #FFF;
                 p{
                     color: #8d8d8d;
                     font-size: 1.1rem;
@@ -103,21 +103,21 @@
                     strong{
                         color: #000;
                     }
-                &:last-of-type{
-                     margin-bottom: 0;
-                 }
+                    &:last-of-type{
+                        margin-bottom: 0;
+                    }
                 }
                 &:before{
-                     content: '';
-                     width: 80px;
-                     height: 2px;
-                     position: absolute;
-                     left: 50%;
-                     bottom: 10rem;
-                     background: #8d8d8d;
-                     transform: translateX(-50%);
-                 }
-           }
+                    content: '';
+                    width: 80px;
+                    height: 2px;
+                    position: absolute;
+                    left: 50%;
+                    bottom: 10rem;
+                    background: #8d8d8d;
+                    transform: translateX(-50%);
+                }
+            }
         }
     }
 
@@ -131,6 +131,6 @@
                     transform: translateY(0);
                 }
             }
-         }
+        }
     }
 </style>
