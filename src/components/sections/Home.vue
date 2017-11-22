@@ -43,7 +43,7 @@
             return {
                 preloadIMG: [
                     'static/images/projects/victoria-masthead/hero-gif.gif',
-                    'static/images/projects/nano-6/hero-gif.gif',
+//                    'static/images/projects/nano-6/hero-gif.gif',
 //                    'static/images/projects/thebar/hero-gif.gif',
 //                    'static/images/projects/ktbo/hero-gif.gif',
 //                    'static/images/videogames.gif',

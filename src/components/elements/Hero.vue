@@ -5,7 +5,9 @@
             <p class="hero__name__subtitle"><span>Full-Stack Developer, <small>also mom says that I’m a good boy</small></span></p>
         </div>
         <!--<router-view @canvasShowed="initHome" class="view" name="HeroCanvas"></router-view>-->
-        <canvas class="hero__canvas" id="hero__canvas" :style="{ top: -(scrollPosition/2) + 'px' }"></canvas>
+        <div class="cancel_scoll" id="cancel_scoll"></div>
+        <div class="hero__canvas" id="hero__canvas" :style="{ top: -(scrollPosition/2) + 'px' }"></div>
+        <!--<canvas class="hero__canvas" id="hero__canvas" :style="{ top: -(scrollPosition/2) + 'px' }"></canvas>-->
     </div>
 </template>
 
@@ -33,7 +35,14 @@
                 speedChange: false,
                 particleCount: 0,
 
-
+                target3D: '',
+                camera: '',
+                scene: '',
+                renderer: '',
+                angle: 0,
+                radius: 100,
+                controls: '',
+                rotateActive: true,
             }
         },
         props: ['scrollPosition'],
@@ -44,35 +53,114 @@
             this.initHero();
         },
         methods: {
+            addCubes: function() {
+                var cubeSize = 0.3;
+                var geometry = new THREE.CubeGeometry(cubeSize, cubeSize, cubeSize);
+                var nCubes = 50;
+                var line;
+                var edges;
+                for (var i = 0; i < nCubes; i++) {
+                    edges = new THREE.EdgesGeometry( geometry );
+                    line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x73e47A } ) );
+                    line.position.x = (Math.random() - 0.5) * 5;
+                    line.position.y = (Math.random() - 0.5) * 5;
+                    line.position.z = (Math.random() - 0.5) * 5;
+                    line.rotation.x = (Math.random() - 0.5) * 5;
+                    line.rotation.y = (Math.random() - 0.5) * 5;
+                    line.rotation.z = (Math.random() - 0.5) * 5;
+                    this.scene.add( line );
+                }
+            },
+            init: function() {
+                this.renderer = new THREE.WebGLRenderer({ alpha: true });
+                this.target3D = document.getElementById('hero__canvas');
+
+                console.log(this.winW, this.winH);
+                this.renderer.setSize(this.winW, this.winH);
+                this.target3D.append(this.renderer.domElement);
+
+                this.camera = new THREE.PerspectiveCamera(1, this.winW / this.winH, 1, 1000);
+                this.camera.position.z = 100;
+
+                this.controls = new THREE.TrackballControls( this.camera , this.renderer.domElement);
+                this.controls.noZoom = true;
+                this.controls.noScroll = true;
+                this.controls.noPan = true;
+                this.controls.addEventListener( 'change', this.render );
+
+//                this.controls.enableZoom = false;
+//                this.controls.enablePan = false;
+
+                this.scene = new THREE.Scene();
+
+//                this.render();
+
+                this.target3D.addEventListener('resize', this.onWindowResize, false);
+                this.target3D.addEventListener('touchstart', this.activateClick, false);
+                this.target3D.addEventListener('touchend', this.unActivateClick, false);
+                this.target3D.addEventListener('mousedown', this.activateClick, false);
+                this.target3D.addEventListener('mouseup', this.unActivateClick, false);
+
+
+                this.target3D.addEventListener('mousewheel', null, false);
+            },
+            animate: function() {
+                requestAnimationFrame(this.animate);
+                this.controls.update();
+                if(this.rotateActive){
+                    this.camera.position.x = this.radius * Math.cos( this.angle );
+                    this.camera.position.z = this.radius * Math.sin( this.angle );
+                    this.angle += 0.005;
+                }
+            },
+            render: function() {
+                this.renderer.render(this.scene, this.camera);
+//                this.animate();
+            },
+            onWindowResize: function() {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.controls.handleResize();
+            },
+            activateClick: function() {
+                this.rotateActive = false;
+            },
+            unActivateClick: function() {
+                this.rotateActive = true;
+            },
             initHero: function () {
                 const canvasArea = document.getElementById("canvas-area");
                 this.winW = canvasArea.clientWidth;
                 this.winH = canvasArea.clientHeight;
 
-                const canvas = document.getElementById("hero__canvas");
-                canvas.width = this.winW;
-                canvas.height = this.winH;
-                console.log(this.winW, this.winH);
-                this.context = canvas.getContext("2d");
+                document.getElementById('cancel_scoll').style.width = this.winW + 'px';
+                document.getElementById('cancel_scoll').style.height = this.winH + 'px';
 
-                this.drawCircles();
+                this.init();
+                this.animate();
+                this.addCubes();
+                this.render();
 
-                canvas.addEventListener('mousedown', function(event) {
-                    this.speedChange = true;
-                    this.mouseDown = true;
-                }.bind(this), false);
-                canvas.addEventListener('touchstart', function(event) {
-                    this.speedChange = true;
-                    this.mouseDown = true;
-                }.bind(this), false);
-                canvas.addEventListener('mouseup', function(event) {
-                    this.speedChange = false;
-                    this.mouseDown = false;
-                }.bind(this), false);
-                canvas.addEventListener('touchend', function(event) {
-                    this.speedChange = false;
-                    this.mouseDown = false;
-                }.bind(this), false);
+                this.initTitle();
+//                this.drawCircles();
+
+//                canvas.addEventListener('mousedown', function(event) {
+//                    this.speedChange = true;
+//                    this.mouseDown = true;
+//                }.bind(this), false);
+//                canvas.addEventListener('touchstart', function(event) {
+//                    this.speedChange = true;
+//                    this.mouseDown = true;
+//                }.bind(this), false);
+//                canvas.addEventListener('mouseup', function(event) {
+//                    this.speedChange = false;
+//                    this.mouseDown = false;
+//                }.bind(this), false);
+//                canvas.addEventListener('touchend', function(event) {
+//                    this.speedChange = false;
+//                    this.mouseDown = false;
+//                }.bind(this), false);
             },
 
             drawCircles: function() {
@@ -212,6 +300,12 @@
     $easeInBack      :  cubic-bezier(0.600, -0.280, 0.735, 0.045);
     $easeOutBack     :  cubic-bezier(0.175,  0.885, 0.320, 1.275);
     $easeInOutBack   :  cubic-bezier(0.680, -0.550, 0.265, 1.550);
+
+    .cancel_scoll{
+        z-index: 2;
+        position: absolute;
+        top:0; left: 0; right: 0; bottom: 0;
+    }
 
     .hero{
         width: 100%;
