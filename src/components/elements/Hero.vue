@@ -54,12 +54,12 @@
         },
         methods: {
             addCubes: function() {
-                var cubeSize = 0.3;
-                var geometry = new THREE.CubeGeometry(cubeSize, cubeSize, cubeSize);
-                var nCubes = 50;
-                var line;
-                var edges;
-                for (var i = 0; i < nCubes; i++) {
+                let cubeSize = 0.3;
+                let geometry = new THREE.CubeGeometry(cubeSize, cubeSize, cubeSize);
+                let nCubes = 50;
+                let line;
+                let edges;
+                for (let i = 0; i < nCubes; i++) {
                     edges = new THREE.EdgesGeometry( geometry );
                     line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0x73e47A } ) );
                     line.position.x = (Math.random() - 0.5) * 5;
@@ -166,17 +166,17 @@
             drawCircles: function() {
                 let $this = this;
                 let randomX = 0, randomY = 0, speed = 0, size = 0, delay;
-                for (var i = 0; i < this.settings.circlesLimit; i++) {
+                for (let i = 0; i < this.settings.circlesLimit; i++) {
                     randomX =  Math.random() * this.winW;
                     randomY = Math.random() * this.winH;
-                    speed = 0.1 + Math.random() * 1;
+                    speed = 0.1 + Math.random();
                     size = Math.floor(Math.random() * this.settings.sizeCircles) + (this.settings.sizeCircles / 2);
                     delay = Math.random() * 0.09;
                     let circle = new Circle(100, speed, size, randomX, randomY, delay);
                     $this.circles.push(circle);
                 }
 
-//                for (var i = 0; i < 10; i++) {
+//                for (let i = 0; i < 10; i++) {
 //                    randomX =  Math.random() * $this.winW;
 //                    randomY = Math.random() * $this.winH;
 //                    speed = 0.1 + Math.random();
@@ -200,7 +200,7 @@
 
                     let signHelper = Math.floor(Math.random() * 2);
 
-                    if (signHelper == 1) {
+                    if (signHelper === 1) {
                         this.sign = -1;
                     } else {
                         this.sign = 1;
@@ -267,8 +267,8 @@
 
             draw: function() {
                 this.context.clearRect(0, 0, this.winW, this.winH);
-                for (var i = 0; i < this.circles.length; i++) {
-                    var myCircle = this.circles[i];
+                for (let i = 0; i < this.circles.length; i++) {
+                    let myCircle = this.circles[i];
                     myCircle.update();
                 }
                 if(this.showedCanvas === false){
